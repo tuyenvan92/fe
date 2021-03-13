@@ -79,7 +79,7 @@ console.log(question4())
 
 
 function question5() {
-    let arr = [];
+    const arr = [];
     for (let i=0; i<51; i++ ) {
         arr.push(i);
     }
@@ -90,7 +90,6 @@ function question5() {
     }
     for (let i=51; i>5; i--) {
         arr[i]=arr[i-1];
-        
     }
     arr[5] = 45;
     console.log(arr);
