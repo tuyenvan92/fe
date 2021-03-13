@@ -13,10 +13,18 @@
 // console.log(hw1('abc',30))
 
 function question1 () {
-    let num = prompt("Nhap vao con so")
-    if (num%3===0 && num%7===0){
+    let num = prompt("Nhap vao con so");
+
+    // tuyen code
+    // if (num%3===0 && num%7===0){
+    //     return 'so chia het cho 3 va 7';
+    // } else return 'so khong chia het cho 3 va 7';
+
+    // tony code
+    if (num%3===0 && num%7===0) {
         return 'so chia het cho 3 va 7';
-    } else return 'so khong chia het cho 3 va 7';
+    };
+    return 'so khong chia het cho 3 va 7';
 }
 console.log(question1())
 
@@ -24,7 +32,6 @@ console.log(question1())
 
 function question2 () {
     let num2 = prompt("Nhap vao diem so")
-    let text;
     switch (num2) {
         case 3:
             console.log('E')
