@@ -14,23 +14,23 @@
 
   <div class="content">
     <h4>Add New Issue:</h4>
-    <form class="">
+    <form id="formIssue" class="">
       <p class="title">Description</p>
-      <input type="text" class="form-control form-name" placeholder="Describe the issue...">
+      <input id="description" type="text" class="form-control form-name" placeholder="Describe the issue...">
       <p class="name">Severity</p>
-      <select class= "form-select" >
+      <select id="severity"  class= "form-select" >
         <option value="Low">Low</option>
         <option value="Medium">Medium</option>
         <option value="High">High</option>
       </select>
       <p class="title">Assigned To</p>
-      <input type="text" class="form-control form-assign" placeholder="Enter responsible...">
-      <button class="btn btn-primary">Add</button>
-      <button class = "btn btn-secondary btn-detete-all">Delete All</button>
-    </div>
+      <input id="assignTo" type="text" class="form-control form-assign" placeholder="Enter responsible...">
+      <button type="submit" class="btn btn-primary">Add</button>
+      <button type="button" class="btn btn-secondary btn-detete-all">Delete All</button>
     </form>
+  </div>
     
-
+  <div id="issues"></div>
   <div class="task">
     <!-- <div class="box">
       <p class="id-title">Issue ID: <span class="id">bc71f535-a73c-5edf-b62d-351d3125fd1f</span></p>
