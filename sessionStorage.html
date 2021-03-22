@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sessionStorage</title>
+</head>
+<body>
+    <button onclick="clickCounter()">Click me</button>
+    <button onclick="removeClickCount()">remove sessionStorage</button>
+    <button onclick="removeAllLocalstroage()">clear all sessionStorage</button>
+    <div id="num"></div>
+    <script type="text/javascript">
+      function clickCounter() {
+        let clickCount = window.sessionStorage.getItem('clickCount');
+        if(!clickCount) {
+          window.sessionStorage.setItem('clickCount', 0);
+        } else {
+          clickCount = Number(clickCount) + 1;
+          window.sessionStorage.setItem('clickCount', clickCount);
+        }
+        document.getElementById("num").innerHTML = "Click times: " + window.sessionStorage.getItem('clickCount');;
+      }
+
+      function removeClickCount() {
+        window.sessionStorage.removeItem('clickCount')
+      }
+
+      function removeAllLocalstroage() {
+        window.sessionStorage.clear();
+      }
+    </script>
+</body>
+</html>

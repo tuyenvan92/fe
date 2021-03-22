@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="clickCounter()">Click me</button>
+    <button onclick="removeClickCount()">remove localstorage</button>
+    <button onclick="removeAllLocalstroage()">clear all localstorage</button>
+    <div id="num"></div>
+    <script type="text/javascript">
+      function clickCounter() {
+        let clickCount = window.localStorage.getItem('clickCount');
+        if(!clickCount) {
+          window.localStorage.setItem('clickCount', 0);
+        } else {
+          clickCount = Number(clickCount) + 1;
+          window.localStorage.setItem('clickCount', clickCount);
+        }
+        document.getElementById("num").innerHTML = "Click times: " + window.localStorage.getItem('clickCount');;
+      }
+
+      function removeClickCount() {
+        window.localStorage.removeItem('clickCount')
+      }
+
+      function removeAllLocalstroage() {
+        window.localStorage.clear();
+      }
+
+      // storage a object json in local storage
+      const persons = {
+        firstName: 'truong',
+        lastName: 'nguyen'
+      };
+      const stringifyObject = JSON.stringify(persons);
+      window.localStorage.setItem('person', stringifyObject)
+      const getItemFromLocalStorage = window.localStorage.getItem('person');
+      const parsePerson = JSON.parse(getItemFromLocalStorage);
+      console.log('', parsePerson)
+
+      function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      } 
+
+
+    </script>
+</body>
+</html>
