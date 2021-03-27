@@ -12,6 +12,9 @@
     <button id="btnSubmit">fetch todo promise</button>
     <div id="container"></div>
 
+    <input type="file"/>
+    <button id="btnUploadFile" type="button">upload file</button>
+
     <script type="text/javascript">
       function fakeApi(url) {
         return new Promise((resolve, reject) => {
@@ -37,11 +40,42 @@
       })
 
 
-      fetch("https://jsonplaceholder.typicode.com/todos/1")
-        .then(response => response.json())
-        .then(data => console.log(data));
-
+      // method fetch
+      const newUsers = {
+        email: 'truong@gmail.com',
+        password: '123'
+      }
+      fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'plain/txt',
+        },
+        body: JSON.stringify(newUsers)
+      }).then(response => console.log('method: ', response))
      })
+
+      // upload file
+      document.getElementById('btnUploadFile').addEventListener('click', () => {
+        const formData = new FormData();
+        const fileField = document.querySelector('input[type="file"]');
+
+        formData.append('username', 'abc123');
+        formData.append('avatar', fileField.files[0]);
+
+        fetch('https://jsonplaceholder.typicode.com/posts', {
+          method: 'PUT',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(result => {
+          console.log('Success:', result);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      })
+     
+
     </script>
 </body>
 </html>
