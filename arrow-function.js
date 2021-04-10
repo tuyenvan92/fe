@@ -28,7 +28,7 @@ console.log('arrowObj: ' + arrowObj().getName());
 
 /* 
 Bai tap 1:
-Cho 1 array tu 0 => 10. Viet 1 arrow function de multiple cac element trong array do.
+Cho 1 array tu [1 -> 10]. Viet 1 arrow function de multiple cac element trong array do.
 
 Bai tap 2:
 - generate 1 new array like object:
