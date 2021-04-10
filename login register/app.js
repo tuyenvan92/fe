@@ -5,17 +5,17 @@
 // let passwordConfirm=myForm["passwordConfirm"].value
 
 // function validateForm() {
-    // if (username=="") {
+    // if (username==="") {
     //     alert("Please enter your Username");
     //     myForm["username"].focus();
     //     return false;
     // }
-    // if (email==""){
+    // if (email===""){
     //     alert("Please enter your Email")
     //     myForm["email"].focus();
     //     return false;
     // }
-    // if (password=="") {
+    // if (password==="") {
     //     alert("Please enter your Password");
     //     myForm["password"].focus;
     //     return false;
@@ -25,7 +25,7 @@
     //     myForm["passwordConfirm"].focus;
     //     return false;
     // }
-    // if (username!="" && emai!="" && password!="" && passwordConfirm==password) {
+    // if (username!="" && emai!="" && password!="" && passwordConfirm===password) {
     //     alert("Registration successfull");
     // }
     // return true;
@@ -40,40 +40,53 @@
 //   }
 
 $(document).ready(function() {
-    $("#signup-form").submit(function() {
-        var username = $("#username").val();
-        var password = $("#password").val();
-        var email = $("#email").val();
-        var passwordConfirm = $("#passwordConfirm").val();
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
-        localStorage.setItem("passwordConfirm", passwordConfirm);
-        localStorage.setItem("email", email);
+    // $("#btnSubmit").click(function() {
+    //     console.log('click button')
+    // })
+    $("#signup-form").submit(function(event) {
+        event.preventDefault();
+        let listUsers = JSON.parse(localStorage.getItem('users')) || [];
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const email = document.getElementById('email').value;
+        const passwordConfirm =  document.getElementById('passwordConfirm').value;
         
-        if (username=="") {
+        if (username === "") {
             alert("Please enter your Username");
             myForm["username"].focus();
-            return false;
+            return;
         }
-        if (email==""){
+        if (email===""){
             alert("Please enter your Email")
             myForm["email"].focus();
-            return false;
+            return;
         }
-        if (password=="") {
+        if (password==="") {
             alert("Please enter your Password");
             myForm["password"].focus;
-            return false;
+            return;
         }
-        if (passwordConfirm!=password) {
+        if (passwordConfirm!==password) {
             alert("Password and confirm password do not match");
             myForm["passwordConfirm"].focus;
-            return false;
+            return;
         }
-        if (username!="" && emai!="" && password!="" && passwordConfirm==password) {
-            alert("Registration successfull");
-            return true;
+        
+        for (const index in listUsers) {
+            if (listUsers[index].email === email) {
+                alert("your email have used");
+                return;
+            }
         }
+        const newUsers = {
+            username,
+            password,
+            email
+        }
+        listUsers.push(newUsers)
+        alert("Registration successfull");
+        localStorage.setItem("users", JSON.stringify(listUsers));
     })
 
     $("#login-form").submit(function() {
@@ -83,11 +96,10 @@ $(document).ready(function() {
         var storedName = localStorage.getItem("username");
         var storedPass = localStorage.getItem("password");
         
-        if (enteredName == storedName && enteredPass == storedPass) {
+        if (enteredName === storedName && enteredPass === storedPass) {
             alert('You are logged in!');
         } else {
             alert('Username and Password do not match!');
         }
     })
 });
-
