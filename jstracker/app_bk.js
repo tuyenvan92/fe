@@ -6,32 +6,6 @@ const addTask = (obj) => {
   const taskItem = document.createElement('div')
   taskItem.className = 'box task-item'
 
-  // taskItem.innerHTML = `
-  //   <p class="id-title">Issue ID: <span class="id"></span></p>
-  //   <button class="btn btn-info">Open</button>
-  //   <div class="issue-name">${obj.value}</div>
-  //   <div class="severity">
-  //     <img src="https://img.icons8.com/pastel-glyph/64/000000/clock--v1.png"/>
-  //     <span class="issue-level"> ${obj.level}</span>
-  //   </div>
-  //   <div class="assign">
-  //     <img src="https://img.icons8.com/ios-glyphs/26/000000/user-male.png"/>
-  //     <span class="issue-assign"> ${obj.assign}</span>
-  //   </div>
-  //   <button class="btn btn-warning">Close</button>
-  //   <button class="btn btn-danger">Delete</button>
-  // `
-
-  // taskItem.addEventListener('click', event => {
-  //   if (event.target.classList.contains('.btn-delete')) {
-  //     const check=confirm(`Do you want to remove?`)
-  //     if (check) {
-  //       taskItem.remove()
-  //       const index =tasks.findIndex(taskItem => taskItem === obj.name)
-  //       tasks.splice(index,1)
-  //     }
-  //   }
-  // })
   let guid = () => {
     let s4 = () => {
         return Math.floor((1 + Math.random()) * 0x10000)
@@ -66,6 +40,16 @@ const addTask = (obj) => {
   const issueLevel = document.createElement('span')
   issueLevel.textContent = obj.level
   issueLevel.className = 'issue-level'
+     // CHANGE SEVERITY'S TEXT COLOR
+  issueLevel.addEventListener('change', function() {
+    if (issueLevel.textContent === 'Medium') {
+      issueLevel.style.color = 'yellow'; 
+    }
+    if (issueLevel.textContent === 'High') {
+      issueLevel.style.color = 'red'; 
+    }
+  });
+ 
 
   const div = document.createElement('div')
   div.className = 'div'
@@ -100,6 +84,8 @@ const addTask = (obj) => {
     btnInfo.innerHTML = 'Closed'
   })
 
+
+
   taskItem.appendChild(idTitle)
   taskItem.appendChild(idNum)
   taskItem.appendChild(linebreak)
@@ -114,6 +100,9 @@ const addTask = (obj) => {
   taskItem.appendChild(btnClose)
   taskItem.appendChild(btnDelete)
   document.querySelector('.task').appendChild(taskItem)
+
+
+  
 }
 
 // SUBMIT
@@ -141,11 +130,11 @@ document.querySelector('form').addEventListener('submit', (event) => {
   }
 })
 
-// DELETE ALL
-// document.querySelector('.btn-detete-all').addEventListener('click', event => {
-//   document.querySelector('.tasks').innerHTML = ''
-//   localStorage.removeItem('tasks')
-// }) 
+//DELETE ALL
+document.querySelector('.btn-delete-all').addEventListener('click', event => {
+ //document.querySelector('.tasks').innerHTML = ''
+  localStorage.removeItem('tasks')
+}) 
 
 //INIT
 getTasks().forEach((taskItem) => {
