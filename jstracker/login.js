@@ -9,6 +9,7 @@ function validateEmail(mail) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(mail).toLowerCase()); // return true || false
 }
+
 const loading = document.getElementById('loading');
 loading.style.display = 'none';
 
@@ -25,65 +26,45 @@ window.addEventListener('load', () => {
     listUsers = res.data
   })
 
-  // register html
-  const registerForm = document.getElementById('register');
-  registerForm.addEventListener('submit', (e) => {
+  // lgoin html
+  const loginForm = document.getElementById('login-form');
+  loginForm.addEventListener('submit', (e) => {
     e.preventDefault(); 
+
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const passwordConfirm = document.getElementById('passwordConfirm').value;
     const msgEmail = document.getElementById('msgEmail');
-    const msgPassword = document.getElementById('msgPassword');
     const msgError = document.getElementById('msgError');
 
     msgEmail.innerHTML = '';
-    msgPassword.innerHTML = '';
     msgError.innerHTML = '';
 
     // validate value
+    if (email === '') {
+      msgEmail.innerHTML = `Please input email`;
+      return;
+    }
     if (!validateEmail(email)) {
       msgEmail.innerHTML = 'Email is invalid';
       return;
     }
-    if (password === '') {
-      msgPassword.innerHTML = `Please input password`;
-      return;
-    }
-    if (password !== passwordConfirm) {
-      msgPassword.innerHTML = `Password Confirm doesn't match password`;
-      return;
-    }
+    
+    loading.style.display = 'block';
 
     // check email exist
-    const isExistEmail = listUsers.some(user => user.email === email);
-    if (isExistEmail) {
-      msgError.innerHTML = 'This email is taken';
+    const account = listUsers.find(user => user.email === email && user.password === password);
+    if (!account) {
+      msgError.innerHTML = `Email doesn't exist. Please register.`;
       return;
     }
+    // login success
+    loading.style.display = 'none';
 
-    // register success
-    const newUser = {
-      email,
-      password,
-      firstName: '',
-      lastName: '',
-      country: '',
-      subject: ''
+    const user = {
+      id: account.id,
     }
-    loading.style.display = 'block';
-    fetch('https://tony-json-server.herokuapp.com/api/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newUser)
-    })
-    .then(_ => {
-      loading.style.display = 'none';
-      // show popup confirm when call api success
-      
-      // window.location.href = './login.html';
-    })
+    window.localStorage.setItem('users', JSON.stringify(user));
+    window.location.href = './index.html';
   })
 })
 
