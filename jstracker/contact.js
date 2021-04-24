@@ -3,19 +3,30 @@ url: https://tony-json-server.herokuapp.com/api/users
 github: https://github.com/nhattruongniit/tony-json-server
 */
 
-// validate
-function validateEmail(mail) {
-  // regex expression
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(mail).toLowerCase()); // return true || false
-}
 const loading = document.getElementById('loading');
 loading.style.display = 'none';
 
 window.addEventListener('load', () => {
   const getUser = window.localStorage.getItem('users');
   const user = JSON.parse(getUser);
+  
+  
+  // fetch user
+  fetch(`https://tony-json-server.herokuapp.com/api/users/${user.id}`)
+    .then(res => res.json())
+    .then(res => {
+      const firstName = document.getElementById('firstName');
+      const lastName = document.getElementById('lastName');
+      const country = document.getElementById('country');
+      const subject = document.getElementById('subject');
+      const data = res.data;
 
+      firstName.value = data.firstName;
+      lastName.value = data.lastName;
+      country.value = data.country;
+      subject.value = data.subject
+    })
+  // submit contact form
   const contactForm = document.getElementById('contactForm');
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault(); 
