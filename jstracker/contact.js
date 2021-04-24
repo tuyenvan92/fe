@@ -47,3 +47,6 @@ window.addEventListener('load', () => {
     })
   })
 })
+function logOut() {
+  window.localStorage.clear();
+}

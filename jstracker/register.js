@@ -2,6 +2,10 @@
 url: https://tony-json-server.herokuapp.com/api/users
 github: https://github.com/nhattruongniit/tony-json-server
 */
+function validateEmail(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
 
 const loading = document.getElementById('loading');
 loading.style.display = 'none';
@@ -44,6 +48,10 @@ window.addEventListener('load', () => {
       msgPassword.innerHTML = `Password Confirm doesn't match password`;
       return;
     }
+    if (password === '' && password !== passwordConfirm) {
+      $('.modal').show();
+      return true;
+    }
 
     // check email exist
     const isExistEmail = listUsers.some(user => user.email === email);
@@ -70,9 +78,13 @@ window.addEventListener('load', () => {
       body: JSON.stringify(newUser)
     })
     .then(_ => {
-      loading.style.display = 'none';
+      //loading.style.display = 'none';
       // show popup confirm when call api success
-      window.location.href = './login.html';
+      $('.modal').show();
+      //window.location.href = './login.html'; 
     })
   })
 })
+function registerSuc() {
+  window.location.href = './login.html';
+}

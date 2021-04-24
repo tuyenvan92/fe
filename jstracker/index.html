@@ -37,19 +37,33 @@
     <form id="todoForm" class="">
       <p class="title">Description</p>
       <input id="description" type="text" class="form-control form-name" placeholder="Describe the issue...">
+      <div id="msgDescription" class="block invalid-feedback"></div>
+      <br/>
       <p class="name">Severity</p>
-      <select id="severity"  class= "form-select" >
+      <select id="severity" onchange="changeColor()" class= "form-select" >
         <option value="Low">Low</option>
         <option value="Medium">Medium</option>
         <option value="High">High</option>
       </select>
       <button type="submit" class="btn btn-primary">Add</button>
+
+      
+      <div id="id01" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body"><p>Registered Successfully !</p></div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">OK</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </form>
   </div>
     
   <div id="issues"></div>
   <div class="task">
-    <button type="button" class="btn btn-secondary btn-delete-all">Delete All</button>
+    <button id = 'deleteAll' onclick = "deleteAll()" type="button" class="btn btn-secondary btn-delete-all">Delete All</button>
     <div id="boxTodos"></div>
   </div>
   <br />
