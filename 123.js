@@ -16,9 +16,20 @@ ex:
 in ra cac object nao` co price > 50 & < 100.
 */
 
-const num = [0,1,2,3,4,5,6,7,8,9,10]
-const newNum = num.map((value, index, array) => {
-    return value*value;
-})
-console.log(newNum);
+// const num = [0,1,2,3,4,5,6,7,8,9,10]
+// const newNum = num.map((value, index, array) => {
+//     return value*value;
+// })
+// console.log(newNum);
 
+// const Objectdelete = {
+//     name: 'truong',
+//     age: 18
+// }
+// delete Objectdelete.age
+// console.log(Objectdelete)
+
+// const array = ['truong','tuyen','minh','trinh'];
+// const newArr = array.find((value, index, array) => {
+//     return value === 'truong'
+// })

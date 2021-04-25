@@ -39,7 +39,7 @@ todoForm.addEventListener('submit', function(e) {
   const description = document.getElementById('description').value;
   const severity = document.getElementById('severity').value;
 
-  //
+  // validate if not enter the issue
   const msgDescription = document.getElementById('msgDescription');
   msgDescription.innerHTML = '';
   if (description === '') {
