@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+    <script>
+        class Clock {
+            contructor(timer, date, hour, mins, secs) {
+                this.timer = timer
+                this.date = date
+                this.hour = hour
+                this.mins = mins
+                this.secs = secs
+            }
+            render() {
+                return this.hour
+                return this.date
+                return this.mins
+                return this.secs
+            }
+            stop() {
+                this.render = "";
+            }
+            start() {
+                return this.render();
+            }
+        }
+        const clock = new Clock();
+        console.log(clock.render())
+    </script>
+</html>
