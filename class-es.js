@@ -52,7 +52,7 @@ class Person {
     return this.firstName;
   }
   getFullName() {
-    return `${this.firstName} ${this.lastName}`
+    return this.firstName + this.lastName
   }
 
 }
@@ -61,16 +61,3 @@ const person = new Person('Tuyen', 'Van', 28, 'yellow');
 console.log(person.getFullName())
 
 
-// write to function
-function PersonFunc(firstName, lastName, age, color) {
-  this.firstName = firstName;
-  this.lastName = lastName;
-  this.age = age;
-  this.color = color;
-
-  this.getFullName = function() {
-    return `${this.firstName} ${this.lastName}`
-  }
-}
-const personFunc = new PersonFunc('Tuyen', 'Van', 28, 'yellow');
-console.log('personFunc: ', personFunc.getFullName())

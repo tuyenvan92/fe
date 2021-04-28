@@ -107,10 +107,63 @@ function setStatus(todoId) {
   $todoId.setStatus = function(btn) {
     btn.target.disabled = true;
   }
-  // $('.close-button').click(function() {
-  //   $(this).attr("disabled",true);
-  // })
 }
+
+// //filter status: open/closed
+// const filterOptions = document.querySelector(".filter-todos");
+// filterOptions.addEventListener("change", filterTodos);
+
+// function filterTodos(e) {
+//   for (const index in listTodo) {
+//     switch (e.target.value) {
+//       case "open":
+//         if ((listTodo[index].status) === 'open') {
+//           loading.style.display = 'block';
+//           fetch(`https://tony-json-server.herokuapp.com/api/todos${todoId}`), {
+//             method: 'GET',
+//             headers: {
+//               'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//               status: 'open'
+//             })
+//           }
+//           .then(_ => {
+//             boxTodos.style.display = "flex";
+//             loading.style.display = 'none';
+//             fetchTodos(listTodo);
+//           })
+//         }
+//         else {
+//           boxTodos.style.display = "none"
+//         }
+//         break;
+
+//       case "closed":
+//         if ((listTodo[index].status) === 'closed') {
+//           loading.style.display = 'block';
+//           fetch(`https://tony-json-server.herokuapp.com/api/todos${todoId}`), {
+//             method: 'GET',
+//             headers: {
+//               'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//               status: 'closed'
+//             })
+//           }
+//           .then(_ => {
+//             boxTodos.style.display = "flex";
+//             loading.style.display = 'none';
+//             fetchTodos(listTodo);
+//           })
+//         }
+//         else {
+//           boxTodos.style.display = "none"
+//         }
+//         break;
+//     }
+//   }
+// } 
 
 
 
@@ -145,7 +198,7 @@ function fetchTodos(list) {
   
   for (const index in list) {
     boxTodos.innerHTML += `<div class="box"><p class="id-title">Issue ID: <span class="id">bc71f535-a73c-5edf-b62d-351d3125fd1f</span></p>
-      <button class="btn btn-info">${list[index].status}</button>
+      <button class="btn btn-info filterDiv">${list[index].status}</button>
       <div class="issue-name">${list[index].description}</div>
       <div class="severity">
         <img src="https://img.icons8.com/pastel-glyph/64/000000/clock--v1.png"/>
