@@ -109,61 +109,65 @@ function setStatus(todoId) {
   }
 }
 
-// //filter status: open/closed
-// const filterOptions = document.querySelector(".filter-todos");
-// filterOptions.addEventListener("change", filterTodos);
+//filter status: open/closed
+const filterOptions = document.querySelector(".filter-todos");
+filterOptions.addEventListener("change", filterTodos);
 
-// function filterTodos(e) {
-//   for (const index in listTodo) {
-//     switch (e.target.value) {
-//       case "open":
-//         if ((listTodo[index].status) === 'open') {
-//           loading.style.display = 'block';
-//           fetch(`https://tony-json-server.herokuapp.com/api/todos${todoId}`), {
-//             method: 'GET',
-//             headers: {
-//               'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//               status: 'open'
-//             })
-//           }
-//           .then(_ => {
-//             boxTodos.style.display = "flex";
-//             loading.style.display = 'none';
-//             fetchTodos(listTodo);
-//           })
-//         }
-//         else {
-//           boxTodos.style.display = "none"
-//         }
-//         break;
+function filterTodos(e) {
+  for (const index in listTodo) {
+    switch (e.target.value) {
+      case "open":
+        if ((listTodo[index].status) === 'open') {
+          loading.style.display = 'block';
+          fetch(`https://tony-json-server.herokuapp.com/api/todos${todoId}`), {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              status: 'open'
+            })
+          }
+          .then(_ => {
+            // boxTodos.style.display = "flex";
+            // loading.style.display = 'none';
+            // fetchTodos(listTodo);
+            listTodo.filter((listTodo) => listTodo[index].status === 'open')
+            fetchTodos(listTodo);
+          })
+        }
+        else {
+          boxTodos.style.display = "none"
+        }
+        break;
 
-//       case "closed":
-//         if ((listTodo[index].status) === 'closed') {
-//           loading.style.display = 'block';
-//           fetch(`https://tony-json-server.herokuapp.com/api/todos${todoId}`), {
-//             method: 'GET',
-//             headers: {
-//               'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//               status: 'closed'
-//             })
-//           }
-//           .then(_ => {
-//             boxTodos.style.display = "flex";
-//             loading.style.display = 'none';
-//             fetchTodos(listTodo);
-//           })
-//         }
-//         else {
-//           boxTodos.style.display = "none"
-//         }
-//         break;
-//     }
-//   }
-// } 
+      case "closed":
+        if ((listTodo[index].status) === 'closed') {
+          loading.style.display = 'block';
+          fetch(`https://tony-json-server.herokuapp.com/api/todos${todoId}`), {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              status: 'closed'
+            })
+          }
+          .then(_ => {
+            // boxTodos.style.display = "flex";
+            // loading.style.display = 'none';
+            // fetchTodos(listTodo);
+            listTodo.filter((listTodo) => listTodo[index].status === 'closed')
+            fetchTodos(listTodo);
+          })
+        }
+        else {
+          boxTodos.style.display = "none"
+        }
+        break;
+    }
+  }
+} 
 
 
 

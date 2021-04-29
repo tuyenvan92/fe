@@ -20,3 +20,8 @@ const isBelowThreshold = (currentValue) => currentValue < 40;
 const arrayEvery = [1, 30, 39, 29, 10, 13, 50];
 console.log('array every: ', arrayEvery.every(isBelowThreshold));
 // expected output: true
+
+
+const fruits = ['Banana','Orange','Apple']
+const x = fruits.pop('Mango')
+console.log(x)

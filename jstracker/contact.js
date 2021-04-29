@@ -26,6 +26,7 @@ window.addEventListener('load', () => {
       country.value = data.country;
       subject.value = data.subject
     })
+
   // submit contact form
   const contactForm = document.getElementById('contactForm');
   contactForm.addEventListener('submit', (e) => {
