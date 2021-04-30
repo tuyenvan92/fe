@@ -82,94 +82,62 @@ function changeColor() {
 
 // update todo open->closed
 function setStatus(todoId) {
-  // document.getElementById("close-button").disabled = true;
+  const status = document.getElementsByClassName("status");
   for (const index in listTodo) { 
     if (listTodo[index].id === todoId) {
       if(listTodo[index].status === 'open') {
-        loading.style.display = 'block';
         fetch(`https://tony-json-server.herokuapp.com/api/todos/${todoId}`, {
-          method: 'PATCH',
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                status: "close"
+            })
+        })
+        listTodo[index].status = "close";
+        status[index].textContent = "close";
+      } else {
+        fetch(`https://tony-json-server.herokuapp.com/api/todos/${todoId}`, {
+          method: "PATCH",
           headers: {
-            'Content-Type': 'application/json'
+              'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            status: 'closed'
+              status: "open"
           })
         })
-        .then(_ => {
-          listTodo[index].status = 'closed';
-          loading.style.display = 'none';
-          fetchTodos(listTodo);
-        })
-      } 
+        listTodo[index].status = "open";
+        status[index].textContent = "open";
+      }
+      fetchTodos(listTodo);
     }
-  }
-  $todoId.setStatus = function(btn) {
-    btn.target.disabled = true;
   }
 }
 
 //filter status: open/closed
-const filterOptions = document.querySelector(".filter-todos");
+const filterOptions = document.getElementById("filter");
 filterOptions.addEventListener("change", filterTodos);
-
 function filterTodos(e) {
-  for (const index in listTodo) {
-    switch (e.target.value) {
-      case "open":
-        if ((listTodo[index].status) === 'open') {
-          loading.style.display = 'block';
-          fetch(`https://tony-json-server.herokuapp.com/api/todos${todoId}`), {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              status: 'open'
-            })
-          }
-          .then(_ => {
-            // boxTodos.style.display = "flex";
-            // loading.style.display = 'none';
-            // fetchTodos(listTodo);
-            listTodo.filter((listTodo) => listTodo[index].status === 'open')
-            fetchTodos(listTodo);
-          })
-        }
-        else {
-          boxTodos.style.display = "none"
-        }
-        break;
-
-      case "closed":
-        if ((listTodo[index].status) === 'closed') {
-          loading.style.display = 'block';
-          fetch(`https://tony-json-server.herokuapp.com/api/todos${todoId}`), {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              status: 'closed'
-            })
-          }
-          .then(_ => {
-            // boxTodos.style.display = "flex";
-            // loading.style.display = 'none';
-            // fetchTodos(listTodo);
-            listTodo.filter((listTodo) => listTodo[index].status === 'closed')
-            fetchTodos(listTodo);
-          })
-        }
-        else {
-          boxTodos.style.display = "none"
-        }
-        break;
+  const option = e.target.value;
+  // clone list todos
+  switch (e.target.value) {
+    case "open": {
+      const newTodos = listTodo.filter(todo => todo.status === option)
+      fetchTodos(newTodos);
+      break;
+    }
+    case "close": {
+      const newTodos = listTodo.filter(todo => todo.status === option)
+      fetchTodos(newTodos);
+      break;
+    }
+    default: {
+      fetchTodos(listTodo);
+      break;
     }
   }
 } 
-
-
 
 // delete todo
 function deleteTodo(todoId) {
@@ -202,7 +170,7 @@ function fetchTodos(list) {
   
   for (const index in list) {
     boxTodos.innerHTML += `<div class="box"><p class="id-title">Issue ID: <span class="id">bc71f535-a73c-5edf-b62d-351d3125fd1f</span></p>
-      <button class="btn btn-info filterDiv">${list[index].status}</button>
+      <p class="btn btn-info filterDiv status">${list[index].status}</p>
       <div class="issue-name">${list[index].description}</div>
       <div class="severity">
         <img src="https://img.icons8.com/pastel-glyph/64/000000/clock--v1.png"/>
