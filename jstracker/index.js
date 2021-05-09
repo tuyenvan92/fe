@@ -121,7 +121,7 @@ filterOptions.addEventListener("change", filterTodos);
 function filterTodos(e) {
   const option = e.target.value;
   // clone list todos
-  switch (e.target.value) {
+  switch (option) {
     case "open": {
       const newTodos = listTodo.filter(todo => todo.status === option)
       fetchTodos(newTodos);
