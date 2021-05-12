@@ -115,6 +115,7 @@ const filterOptions = document.querySelector(".filter-todos");
 filterOptions.addEventListener("change", filterTodos);
 
 function filterTodos(e) {
+<<<<<<< HEAD
   for (const index in listTodo) {
     switch (e.target.value) {
       case "open":
@@ -166,6 +167,24 @@ function filterTodos(e) {
           boxTodos.style.display = "none"
         }
         break;
+=======
+  const option = e.target.value;
+  // clone list todos
+  switch (option) {
+    case "open": {
+      const newTodos = listTodo.filter(todo => todo.status === option)
+      fetchTodos(newTodos);
+      break;
+    }
+    case "close": {
+      const newTodos = listTodo.filter(todo => todo.status === option)
+      fetchTodos(newTodos);
+      break;
+    }
+    default: {
+      fetchTodos(listTodo);
+      break;
+>>>>>>> 30fdbb82792749fae4d2eec16986e2d7f8970d53
     }
   }
 }
