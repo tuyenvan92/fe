@@ -21,8 +21,8 @@ const user = JSON.parse(getUser);
 
 loading.style.display = 'block';
 fetch(`https://tony-json-server.herokuapp.com/api/todos`, {
-  method: 'GET',
-})
+    method: 'GET',
+  })
   .then(res => res.json())
   .then(res => {
     loading.style.display = 'none';
@@ -30,11 +30,11 @@ fetch(`https://tony-json-server.herokuapp.com/api/todos`, {
     fetchTodos(res.data);
   })
 
-
+//--------------------------------------------------------------------------
 
 // add new todo
 const todoForm = document.getElementById('todoForm');
-todoForm.addEventListener('submit', function (e) {
+todoForm.addEventListener('submit', function(e) {
   e.preventDefault();
   const description = document.getElementById('description').value;
   const severity = document.getElementById('severity').value;
@@ -58,119 +58,86 @@ todoForm.addEventListener('submit', function (e) {
   fetch("https://tony-json-server.herokuapp.com/api/todos", {
     method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
     },
     body: JSON.stringify(newTodo)
   })
-    .then(_ => {
-      //$('.modal').show();
-      loading.style.display = 'none';
-      todoForm.reset();
-      listTodo.push(newTodo);
-      fetchTodos(listTodo);
-      changeColor();
-    })
+  .then(_ => {
+    //$('.modal').show();
+    loading.style.display = 'none';
+    todoForm.reset();
+    listTodo.push(newTodo);
+    fetchTodos(listTodo);
+    changeColor();
+  })
 })
 
-//change color of the status
-function changeColor() {
-  const option = document.getElementsByTagName('option').value;
-  option[0].backgroundColor = 'black'
-  option[1].backgroundColor = 'green'
-  option[2].backgroundColor = 'red'
-}
-
+//--------------------------------------------------------------------------
 
 // update todo open->closed
 function setStatus(todoId) {
-  // document.getElementById("close-button").disabled = true;
-  for (const index in listTodo) {
+  const status = document.getElementsByClassName("status");
+  for (const index in listTodo) { 
     if (listTodo[index].id === todoId) {
-      if (listTodo[index].status === 'open') {
-        loading.style.display = 'block';
+      if(listTodo[index].status === 'open') {
         fetch(`https://tony-json-server.herokuapp.com/api/todos/${todoId}`, {
-          method: 'PATCH',
+            method: "PATCH",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                status: "close"
+            })
+        })
+        listTodo[index].status = "close";
+        status[index].textContent = "close";
+      } else {
+        fetch(`https://tony-json-server.herokuapp.com/api/todos/${todoId}`, {
+          method: "PATCH",
           headers: {
-            'Content-Type': 'application/json'
+              'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            status: 'closed'
+              status: "open"
           })
         })
-          .then(_ => {
-            listTodo[index].status = 'closed';
-            loading.style.display = 'none';
-            fetchTodos(listTodo);
-          })
+        listTodo[index].status = "open";
+        status[index].textContent = "open";
       }
+      fetchTodos(listTodo);
     }
-  }
-  $todoId.setStatus = function (btn) {
-    btn.target.disabled = true;
   }
 }
 
+//--------------------------------------------------------------------------
+
+//change color of the status
+// function changeColor() {
+//   const option = document.getElementsByTagName('option').value;
+//   option[0].backgroundColor='black'
+//   option[1].backgroundColor='green'
+//   option[2].backgroundColor='red'
+// }
+// const severityOption = document.getElementById("severity");
+// severityOption.addEventListener("change", colorChange);
+// const issueLevel = document.getElementById("issue-level")
+// function colorChange(e) {
+//   const option = e.target.value;
+//   switch (e.target.value) {
+//     case "Low": {
+//       issueLevel.style.color = "red";
+//     }
+//   }
+// }
+//--------------------------------------------------------------------------
+
 //filter status: open/closed
-const filterOptions = document.querySelector(".filter-todos");
+const filterOptions = document.getElementById("filter");
 filterOptions.addEventListener("change", filterTodos);
-
 function filterTodos(e) {
-<<<<<<< HEAD
-  for (const index in listTodo) {
-    switch (e.target.value) {
-      case "open":
-        if ((listTodo[index].status) === 'open') {
-          loading.style.display = 'block';
-          fetch(`https://tony-json-server.herokuapp.com/api/todos${todoId}`), {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              status: 'open'
-            })
-          }
-            .then(_ => {
-              // boxTodos.style.display = "flex";
-              // loading.style.display = 'none';
-              // fetchTodos(listTodo);
-              listTodo.filter((listTodo) => listTodo[index].status === 'open')
-              fetchTodos(listTodo);
-            })
-        }
-        else {
-          boxTodos.style.display = "none"
-        }
-        break;
-
-      case "closed":
-        if ((listTodo[index].status) === 'closed') {
-          loading.style.display = 'block';
-          fetch(`https://tony-json-server.herokuapp.com/api/todos${todoId}`), {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              status: 'closed'
-            })
-          }
-            .then(_ => {
-              // boxTodos.style.display = "flex";
-              // loading.style.display = 'none';
-              // fetchTodos(listTodo);
-              listTodo.filter((listTodo) => listTodo[index].status === 'closed')
-              fetchTodos(listTodo);
-            })
-        }
-        else {
-          boxTodos.style.display = "none"
-        }
-        break;
-=======
   const option = e.target.value;
   // clone list todos
-  switch (option) {
+  switch (e.target.value) {
     case "open": {
       const newTodos = listTodo.filter(todo => todo.status === option)
       fetchTodos(newTodos);
@@ -184,12 +151,47 @@ function filterTodos(e) {
     default: {
       fetchTodos(listTodo);
       break;
->>>>>>> 30fdbb82792749fae4d2eec16986e2d7f8970d53
+    }
+  }
+} 
+
+//--------------------------------------------------------------------------
+//sort by name: ASC || DESC
+let sort = document.getElementsById("sort"); 
+sort.addEventListener("change", sortBySelect); 
+
+function sortBySelect(e) {
+  const option = e.target.value;
+  switch (e.target.value) {
+    case "asc": {
+      const newTodos = listTodo.description.sort()
+      fetchTodos(newTodos);
+      break;
+    }
+    case "desc": {
+      const newTodos = listTodo.description.reverse()
+      fetchTodos(newTodos);
+      break;
     }
   }
 }
+//--------------------------------------------------------------------------
 
+//search 
+const inputSearch = document.getElementsByClassName("searchName")
+searchText = inputSearch.value.toLowerCase()
+function myFunction() {
+    if (searchText === "") {
+      const newTodos = listTodo.forEach(todo => todo.style.display = "flex");
+      fetchTodos(newTodos);
+    } else {
+      //listTodo.forEach(todo => todo.style.display = "none");
+      const newTodos = listTodo.filter(todo => todo.innerText.toLowerCase().includes(searchText)).forEach(todo => todo.style.display = "flex");
+      fetchTodos(newTodos);
+    }
+}
 
+//--------------------------------------------------------------------------
 
 // delete todo
 function deleteTodo(todoId) {
@@ -197,16 +199,18 @@ function deleteTodo(todoId) {
   fetch(`https://tony-json-server.herokuapp.com/api/todos/${todoId}`, {
     method: 'DELETE'
   })
-    .then(_ => {
-      loading.style.display = 'none';
-      for (const index in listTodo) {
-        if (listTodo[index].id === todoId) {
-          listTodo.splice(index, 1);
-          fetchTodos(listTodo);
-        }
+  .then(_ => {
+    loading.style.display = 'none';
+    for (const index in listTodo) {
+      if(listTodo[index].id === todoId) {
+        listTodo.splice(index, 1);
+        fetchTodos(listTodo);
       }
-    })
+    }
+  })
 }
+
+//--------------------------------------------------------------------------
 
 // delete all 
 document.getElementById('deleteAll').addEventListener('click', event => {
@@ -214,19 +218,20 @@ document.getElementById('deleteAll').addEventListener('click', event => {
   localStorage.removeItem('boxTodos');
 })
 
+//--------------------------------------------------------------------------
 
 // fetch list todo
 function fetchTodos(list) {
   const boxTodos = document.getElementById('boxTodos');
   boxTodos.innerHTML = '';
-
+  
   for (const index in list) {
     boxTodos.innerHTML += `<div class="box"><p class="id-title">Issue ID: <span class="id">bc71f535-a73c-5edf-b62d-351d3125fd1f</span></p>
-      <button class="btn btn-info filterDiv">${list[index].status}</button>
+      <p class="btn btn-info filterDiv status">${list[index].status}</p>
       <div class="issue-name">${list[index].description}</div>
       <div class="severity">
         <img src="https://img.icons8.com/pastel-glyph/64/000000/clock--v1.png"/>
-        <span class="issue-level">${list[index].severity}</span>
+        <span class="issue-level" id="issue-level">${list[index].severity}</span>
       </div>
       <button id="close-button" class="btn btn-warning" onclick="setStatus(\'${list[index].id}\')">Close</button>
       <button class="btn btn-danger btn-delete" onclick="deleteTodo(\'${list[index].id}\')">Delete</button></div>`;
