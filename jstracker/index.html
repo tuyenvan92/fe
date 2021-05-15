@@ -75,11 +75,11 @@
       </span>
     </div>
 
-    <input class="ms-5 my-4 searchName" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+    <input id="inputSearchName" class="ms-5 my-4" type="text" id="myInput" placeholder="Search for names..">
 
     <div class="ms-5 sortTool">
-      <select class="sort py-1 direction" id="sort">
-        <option value="" selected>Sort by</option>
+      <select class="sort py-1 direction" id="inputSortByName">
+        <option value="" disabled>Sort by Name</option>
         <option value="asc" sort="asc">Name ASC</option>
         <option value="desc" sort="desc">Name DESC</option>
       </select>

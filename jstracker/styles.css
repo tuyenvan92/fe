@@ -180,6 +180,14 @@ button {
   top: 56px;
   left: 12px;
 }
+
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+
 @keyframes lds-roller {
   0% {
     transform: rotate(0deg);
