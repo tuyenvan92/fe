@@ -12,6 +12,7 @@ github: https://github.com/nhattruongniit/tony-json-server
 
 
 let listTodo;
+let keywordName = '';
 
 const loading = document.getElementById('loading');
 loading.style.display = 'none';
@@ -157,39 +158,48 @@ function filterTodos(e) {
 
 //--------------------------------------------------------------------------
 //sort by name: ASC || DESC
-let sort = document.getElementById("sort"); 
-sort.addEventListener("change", sortBySelect); 
+const inputSortBsyName = document.getElementById('inputSortByName');
+inputSortByName.addEventListener('change', function(event) {
+  const { value } = event.target;
+  const newTodos = listTodo.sort(function(a, b) {
+    const nameA = a.description.toLowerCase();
+    const nameB = b.description.toLowerCase();
+    if(value === 'asc' && nameA < nameB) {
+      return -1;
+    } else {
+      return -1;
+    }
+  })
+  fetchTodos(newTodos);
+})
 
-function sortBySelect(e) {
-  const option = e.target.value;
-  switch (e.target.value) {
-    case "asc": {
-      const newTodos = listTodo.description.sort()
-      fetchTodos(newTodos);
-      break;
-    }
-    case "desc": {
-      const newTodos = listTodo.description.reverse()
-      fetchTodos(newTodos);
-      break;
-    }
-  }
-}
 //--------------------------------------------------------------------------
 
 //search 
-const inputSearch = document.getElementsByClassName("searchName")
-searchText = inputSearch.value.toLowerCase()
-function myFunction() {
-    if (searchText === "") {
-      const newTodos = listTodo.forEach(todo => todo.style.display = "flex");
-      fetchTodos(newTodos);
-    } else {
-      //listTodo.forEach(todo => todo.style.display = "none");
-      const newTodos = listTodo.filter(todo => todo.innerText.toLowerCase().includes(searchText)).forEach(todo => todo.style.display = "flex");
-      fetchTodos(newTodos);
-    }
-}
+const inputSearchName = document.getElementById("inputSearchName")
+inputSearchName.addEventListener('keyup', function(event) {
+  if(event.keyCode === 13) {
+    // const value = event.target.value; 
+    
+    // -> destructuring
+    const { value } = event.target;
+    // const { target: { value } } = event;
+
+    // -> destructuring with other variable
+    // const { value: valueOther } = event.target;
+    // const { target: { value: valueOther } } = event;
+
+    /*
+      event {
+        target: {
+          value: xxx
+        }
+      }
+      */
+    const newListTodo = listTodo.filter(todo => todo.description.toLowerCase().indexOf(value) !== -1);
+    fetchTodos(newListTodo);
+  }
+})
 
 //--------------------------------------------------------------------------
 
@@ -222,16 +232,29 @@ document.getElementById('deleteAll').addEventListener('click', event => {
 
 // fetch list todo
 function fetchTodos(list) {
+  let colorSeverity = ''
   const boxTodos = document.getElementById('boxTodos');
   boxTodos.innerHTML = '';
   
   for (const index in list) {
+    switch (list[index].severity) {
+      case 'Medium': 
+        colorSeverity = 'green';
+        break;
+      case 'High':
+        colorSeverity = 'red';
+        break;
+      default:
+        colorSeverity = 'black'
+        break;
+    }
+
     boxTodos.innerHTML += `<div class="box"><p class="id-title">Issue ID: <span class="id">bc71f535-a73c-5edf-b62d-351d3125fd1f</span></p>
       <p class="btn btn-info filterDiv status">${list[index].status}</p>
       <div class="issue-name">${list[index].description}</div>
       <div class="severity">
         <img src="https://img.icons8.com/pastel-glyph/64/000000/clock--v1.png"/>
-        <span class="issue-level" id="issue-level">${list[index].severity}</span>
+        <span class="issue-level ${colorSeverity}" id="issue-level">${list[index].severity}</span>
       </div>
       <button id="close-button" class="btn btn-warning" onclick="setStatus(\'${list[index].id}\')">Close</button>
       <button class="btn btn-danger btn-delete" onclick="deleteTodo(\'${list[index].id}\')">Delete</button></div>`;
