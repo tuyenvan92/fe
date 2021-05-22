@@ -157,7 +157,7 @@ function filterTodos(e) {
 
 //--------------------------------------------------------------------------
 //sort by name: ASC || DESC
-let sort = document.getElementsById("sort"); 
+let sort = document.getElementById("sort"); 
 sort.addEventListener("change", sortBySelect); 
 
 function sortBySelect(e) {
