@@ -3,9 +3,9 @@
 // fetch list Photos
 
 window.addEventListener('load', () => {
-    let listPhoto;
-    const getPhoto = window.localStorage.getItem('photos');
-    const photo = JSON.parse(getPhoto);
+    let listPhoto = [];
+    // const getPhoto = window.localStorage.getItem('photos');
+    // const photo = JSON.parse(getPhoto);
 
     fetch(`https://tony-json-server.herokuapp.com/api/photos`, {
         method: 'GET',
@@ -23,7 +23,6 @@ window.addEventListener('load', () => {
         const description = document.getElementById('description').value;
         const image = document.getElementById('image').value
         const newPhoto = {
-            id,
             name,
             description,
             image
@@ -37,7 +36,6 @@ window.addEventListener('load', () => {
             body: JSON.stringify(newPhoto)
         }).then(_ => {
             addNewForm.reset();
-            listPhoto.push(newPhoto);
             window.location.href='./index.html'
         })
     })
