@@ -74,7 +74,54 @@
           console.error('Error:', error);
         });
       })
-     
+
+      // create promise
+      const isShow = true;
+      const p = new Promise((resolve, reject) => {
+        if(isShow) {
+          resolve(1)
+        } else {
+          reject('something is wrong')
+        }
+      })
+      // way1
+      p
+        .then(value => console.log('create promise: ', value))
+        .catch(error => console.log('fail promise: ', error))
+
+      // way2
+      p
+        .then(
+          value => console.log('create promise: ', value),
+          error => console.log('error then promise: ', error)
+        )
+        .catch(error => console.log('fail promise: ', error))
+      
+
+        // chain promise
+        p.then(value => value)
+          .then(valu2 => valu2 * 3)
+          .then(val3 => console.log(val3))
+
+        // single thread 
+
+        // promise all
+        const fetchApi = url => {
+          return fetch(`https://tony-json-server.herokuapp.com/api/${url}`, {
+            method: 'GET',
+          })
+          .then(res => res.json())
+          .then(res =>  res)
+        }
+        const fetchTodos = fetchApi('todos');
+        const fetchPhotos = fetchApi('photos')
+        const fetchUsers = fetchApi('users')
+
+        Promise.all([fetchUsers, fetchTodos, fetchPhotos])
+              .then(values => {
+                console.log('promise all success: ', values)
+              })
+              .catch(error => console.log('promise all error: ', error))
 
     </script>
 </body>
