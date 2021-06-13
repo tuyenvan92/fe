@@ -13,6 +13,7 @@
     <script type="module">
       import sum, { divide } from './helper.js';
       import openNewTab from './openNewTab.js';
+      import * as CONFIGS from './config.js';
       import { timeConvert } from './multiFunction.js';
 
       const resSum = sum(2, 3)
@@ -29,6 +30,11 @@
 
       const resTime = timeConvert(13504323);
       console.log('resTime: ', resTime)
+
+      // check role users
+      const roleUser = 'admin';
+      const isRole = CONFIGS.ROLE_USER.includes(roleUser)
+      console.log('check role users: ', isRole)
       
     </script>
 </body>
