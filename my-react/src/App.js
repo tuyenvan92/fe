@@ -1,19 +1,15 @@
 import { Fragment } from 'react';
 
+// components
+import SampleScores from './SampleScores';
+import LearnProps from './LearnProps';
+import LearnStateHooks from './LearnStateHooks';
+
 
 const dataUsers = {
   firstName: 'nguyen',
   lastName: 'tony'
 }
-
-function CompomentA(props) {
-  return (
-    <div>
-      this is component A
-    </div>
-  )
-}
-
 
 function App() {
   // way 1 element:
@@ -59,8 +55,16 @@ function App() {
       <br />
 
       <h3>Render JSX with React function component</h3>
-      <CompomentA />
-      
+
+      <SampleScores />
+      <LearnProps 
+        firstName="truong" 
+        lastName="tony"
+        className="learn-props"
+        gender="male"
+      />
+
+      <LearnStateHooks />
      
     </div>
   )
