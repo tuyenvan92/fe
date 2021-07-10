@@ -100,3 +100,35 @@
 //     }
 // }
 // console.log(question5())
+
+const input = [{
+    firstName: 'Bobo',
+    lastName: 'Flakes'
+}, {
+    firstName: 'Lawrence',
+    lastName: 'Shilling'
+}, {
+    firstName: 'Anon',
+    lastName: 'User'
+}];
+
+// Output: ['OBOB','ECNERWAL','NONA']
+
+// const array1 = [];
+// for (let i = 0; i < input.length; i++) {
+//     array1.push(input[i].firstName)
+// }
+// const array2 = [];
+// array1.forEach((value, index, array) => {
+//     let c = value.split("").reverse().join("").toUpperCase();
+//     array2.push(c)
+// })
+// console.log(array2)
+
+
+const array = [];
+for (let i = 0; i < input.length; i++) {
+    let c = input[i].firstName.split("").reverse().join("").toUpperCase();
+    array.push(c)
+}
+console.log(array)

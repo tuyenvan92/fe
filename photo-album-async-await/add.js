@@ -15,7 +15,7 @@ window.addEventListener('load', () => {
 
     //add New Photo
     const addNewForm = document.getElementById('addNewForm');
-    addNewForm.addEventListener('submit', function(e) {
+    addNewForm.addEventListener('submit', async function(e) {        
         e.preventDefault();
         const name = document.getElementById('name').value;
         const description = document.getElementById('description').value;
