@@ -8,12 +8,11 @@ import {Fragment} from 'react';
 //import LearnStateHooks from './LearnStateHooks'
 //import { StatefulComponent } from './component/StatefulComponent';
 
-import Comment from './SampleApp-Comment';
-import GuestGreeting from './SampleApp-GuestGreeting'
-import UserGreeting from './SampleApp-UserGreeting';
+import UpdateStateObject from './component/UpdateStateObject';
 
-
-
+// Sample App
+import ComposeComponent from './sampleApp/ComposeComponent/ComposeComponent';
+import GuestGreeting from './sampleApp/GuestGreeting/GuestGreeting';
 
 
 
@@ -122,20 +121,6 @@ function App() {
   //   }
   // }
   
-  const comment = {
-    date : new Date(),
-    text : 'I hope you enjoy learning React',
-    author : {
-        name : 'Hello Kitty',
-        avatarUrl : 'https://placekitten.com/g/64/64'
-    }
-  };
-
-  const user = {
-    text : 'Welcome to',
-    name : 'Tony'
-  }
-
   return (
     <Fragment>
       
@@ -153,9 +138,12 @@ function App() {
       <LearnStateHooks/>
       <LearnProps firstName='tuyen' lastName='van'/>
       <StatefulComponent/> */}
-      <Comment date={comment.date} text={comment.text} author={comment.author}/>
-      <GuestGreeting/>
-      <UserGreeting text={user.text} name={user.name}/>
+
+      <ComposeComponent />
+      <GuestGreeting />
+      <br />
+      --------------------------------------------------------------------
+      <UpdateStateObject />
     </Fragment>
   )
 }
