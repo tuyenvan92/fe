@@ -6,6 +6,7 @@ import LearnProps from './LearnProps';
 import LearnStateHooks from './LearnStateHooks';
 import Button from './components/Button';
 import StatefulComponent  from './components/StatefulComponent';
+import HanldeEvent  from './components/HandleEvent';
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
@@ -77,6 +78,10 @@ function App() {
 
       <h1>Sample App</h1>
       <ComposeComponent />
+
+      -----------------------------
+      <h1>HandleEvent</h1>
+      <HanldeEvent />
      
     </div>
   )
