@@ -60,7 +60,15 @@ function App() {
 
       <br />
 
-      <h3>Render JSX with React function component</h3>
+      <h3 
+        style={{ 
+          color: '#f00', 
+          fontSize: '18px', 
+          fontWeight: 'bold' 
+        }}
+      >
+        Render JSX with React function component
+      </h3>
 
       <SampleScores />
       <LearnProps 
