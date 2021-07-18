@@ -12,8 +12,6 @@ import UpdateStateObject from './component/UpdateStateObject';
 
 // Sample App
 import ComposeComponent from './sampleApp/ComposeComponent/ComposeComponent';
-import GuestGreeting from './sampleApp/GuestGreeting/GuestGreeting';
-
 
 
 // function App() {
@@ -140,7 +138,6 @@ function App() {
       <StatefulComponent/> */}
 
       <ComposeComponent />
-      <GuestGreeting />
       <br />
       --------------------------------------------------------------------
       <UpdateStateObject />

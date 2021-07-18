@@ -7,6 +7,7 @@ import LearnStateHooks from './LearnStateHooks';
 import Button from './components/Button';
 import StatefulComponent  from './components/StatefulComponent';
 import HanldeEvent  from './components/HandleEvent';
+import ConditionRendering from './components/ConditionRender';
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
@@ -82,7 +83,10 @@ function App() {
       -----------------------------
       <h1>HandleEvent</h1>
       <HanldeEvent />
-     
+
+      ---------------------------
+      <h1>Conditional Rendering</h1>
+      <ConditionRendering />
     </div>
   )
   
