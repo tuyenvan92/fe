@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/tuyenvan92/fe/issues"
   },
-  "homepage": "https://github.com/tuyenvan92/fe#readme"
+  "homepage": "https://github.com/tuyenvan92/fe#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.12.2",
+    "clsx": "^1.1.1"
+  }
 }

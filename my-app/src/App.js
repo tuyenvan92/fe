@@ -2,7 +2,7 @@
 import './App.css';
 import {Fragment} from 'react';
 // component
-//import SampleScore from './SampleScore';
+import SampleScore from './SampleScore';
 //import LearnProps from './LearnProps'
 
 //import LearnStateHooks from './LearnStateHooks'
@@ -11,7 +11,10 @@ import {Fragment} from 'react';
 import Comment from './SampleApp-Comment';
 import GuestGreeting from './SampleApp-GuestGreeting'
 import UserGreeting from './SampleApp-UserGreeting';
-
+import UpdateStateObject from './component/UpdateStateObject'
+import HandleEvent from './component/HandleEvent'
+import ConditionRender from './component/ConditionalRender';
+import GenerateBox from './SampleApp-GenerateBox';
 
 
 
@@ -136,6 +139,12 @@ function App() {
     name : 'Tony'
   }
 
+  const mystyle = {
+    color: '#f00', 
+    fontSize: '18px', 
+    fontWeight: 'bold'
+  }
+
   return (
     <Fragment>
       
@@ -156,6 +165,16 @@ function App() {
       <Comment date={comment.date} text={comment.text} author={comment.author}/>
       <GuestGreeting/>
       <UserGreeting text={user.text} name={user.name}/>
+      <UpdateStateObject/>
+      <HandleEvent/>
+      <ConditionRender/>
+
+      <h3 style={mystyle}>Style JSX</h3>
+
+      <SampleScore/>
+
+      <GenerateBox/>
+
     </Fragment>
   )
 }
