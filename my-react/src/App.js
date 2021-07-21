@@ -6,6 +6,8 @@ import LearnProps from './LearnProps';
 import LearnStateHooks from './LearnStateHooks';
 import Button from './components/Button';
 import StatefulComponent  from './components/StatefulComponent';
+import HanldeEvent  from './components/HandleEvent';
+import ConditionRendering from './components/ConditionRender';
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
@@ -58,7 +60,15 @@ function App() {
 
       <br />
 
-      <h3>Render JSX with React function component</h3>
+      <h3 
+        style={{ 
+          color: '#f00', 
+          fontSize: '18px', 
+          fontWeight: 'bold' 
+        }}
+      >
+        Render JSX with React function component
+      </h3>
 
       <SampleScores />
       <LearnProps 
@@ -77,7 +87,14 @@ function App() {
 
       <h1>Sample App</h1>
       <ComposeComponent />
-     
+
+      -----------------------------
+      <h1>HandleEvent</h1>
+      <HanldeEvent />
+
+      ---------------------------
+      <h1>Conditional Rendering</h1>
+      <ConditionRendering />
     </div>
   )
   
