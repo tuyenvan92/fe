@@ -8,19 +8,13 @@ import SampleScore from './SampleScore';
 //import LearnStateHooks from './LearnStateHooks'
 //import { StatefulComponent } from './component/StatefulComponent';
 
-//import Comment from './SampleApp-Comment';
-import GuestGreeting from './SampleApp-GuestGreeting'
-import UserGreeting from './SampleApp-UserGreeting';
 import UpdateStateObject from './component/UpdateStateObject'
 import HandleEvent from './component/HandleEvent'
 import ConditionRender from './component/ConditionalRender';
-import GenerateBox from './SampleApp-GenerateBox';
-
-
 
 // Sample App
 import ComposeComponent from './sampleApp/ComposeComponent/ComposeComponent';
-
+import GenerateBox from './sampleApp/GenerateBox/GenerateBox';
 
 import LiftingStateUp from './component/LiftingStateUp';
 
@@ -130,19 +124,6 @@ function App() {
   //   }
   // }
   
-  const comment = {
-    date : new Date(),
-    text : 'I hope you enjoy learning React',
-    author : {
-        name : 'Hello Kitty',
-        avatarUrl : 'https://placekitten.com/g/64/64'
-    }
-  };
-
-  const user = {
-    text : 'Welcome to',
-    name : 'Tony'
-  }
 
   const mystyle = {
     color: '#f00', 
@@ -167,9 +148,6 @@ function App() {
       <LearnStateHooks/>
       <LearnProps firstName='tuyen' lastName='van'/>
       <StatefulComponent/> */}
-      <Comment date={comment.date} text={comment.text} author={comment.author}/>
-      <GuestGreeting/>
-      <UserGreeting text={user.text} name={user.name}/>
       <UpdateStateObject/>
       <HandleEvent/>
       <ConditionRender/>
@@ -178,9 +156,15 @@ function App() {
 
       <SampleScore/>
 
+      --------------------------------------------------------------------
+      <h2>Sampel App - GenerateBox</h2>
       <GenerateBox/>
 
-      <h1>Lifting State Up</h1>
+
+      <ComposeComponent />
+      <br />
+      --------------------------------------------------------------------
+      <UpdateStateObject />
     </Fragment>
   )
 }
