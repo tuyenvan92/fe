@@ -8,23 +8,13 @@ import SampleScore from './SampleScore';
 //import LearnStateHooks from './LearnStateHooks'
 //import { StatefulComponent } from './component/StatefulComponent';
 
-<<<<<<< HEAD
-import Comment from './SampleApp-Comment';
-import GuestGreeting from './SampleApp-GuestGreeting'
-import UserGreeting from './SampleApp-UserGreeting';
 import UpdateStateObject from './component/UpdateStateObject'
 import HandleEvent from './component/HandleEvent'
 import ConditionRender from './component/ConditionalRender';
-import GenerateBox from './SampleApp-GenerateBox';
-
-
-=======
-import UpdateStateObject from './component/UpdateStateObject';
->>>>>>> b3e41a844595964b78b21d90b5053ac28e0fb757
 
 // Sample App
 import ComposeComponent from './sampleApp/ComposeComponent/ComposeComponent';
-
+import GenerateBox from './sampleApp/GenerateBox/GenerateBox';
 
 // function App() {
 //   const element = <h1>Start react</h1>
@@ -131,20 +121,6 @@ function App() {
   //   }
   // }
   
-<<<<<<< HEAD
-  const comment = {
-    date : new Date(),
-    text : 'I hope you enjoy learning React',
-    author : {
-        name : 'Hello Kitty',
-        avatarUrl : 'https://placekitten.com/g/64/64'
-    }
-  };
-
-  const user = {
-    text : 'Welcome to',
-    name : 'Tony'
-  }
 
   const mystyle = {
     color: '#f00', 
@@ -152,8 +128,6 @@ function App() {
     fontWeight: 'bold'
   }
 
-=======
->>>>>>> b3e41a844595964b78b21d90b5053ac28e0fb757
   return (
     <Fragment>
       
@@ -171,10 +145,6 @@ function App() {
       <LearnStateHooks/>
       <LearnProps firstName='tuyen' lastName='van'/>
       <StatefulComponent/> */}
-<<<<<<< HEAD
-      <Comment date={comment.date} text={comment.text} author={comment.author}/>
-      <GuestGreeting/>
-      <UserGreeting text={user.text} name={user.name}/>
       <UpdateStateObject/>
       <HandleEvent/>
       <ConditionRender/>
@@ -183,15 +153,15 @@ function App() {
 
       <SampleScore/>
 
+      --------------------------------------------------------------------
+      <h2>Sampel App - GenerateBox</h2>
       <GenerateBox/>
 
-=======
 
       <ComposeComponent />
       <br />
       --------------------------------------------------------------------
       <UpdateStateObject />
->>>>>>> b3e41a844595964b78b21d90b5053ac28e0fb757
     </Fragment>
   )
 }
