@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 
-function Box({ box }) {
+function Box({ box,toggleId }) {
     return (
-       <div className='box'>
+       <div className='box' onClick={() => toggleId(box.id)}>
            {box.text}
        </div>
     );
@@ -24,6 +24,8 @@ function Form({ handleSubmit}) {
     );
 }
 
+
+
 export default function GenerateBox() {
     const [boxs, setBoxs]  = useState([])
 
@@ -39,12 +41,16 @@ export default function GenerateBox() {
         setBoxs(newBoxs);
     };
 
+    function toggleId(boxId) {
+        console.log('toggleId: ',boxId)
+    }
+
     return (
         <div>
             <Form  handleSubmit={handleSubmit} />
             <div>
                 {boxs.map((box, index) => (
-                    <Box key={`box-${index}`} box={box}/>
+                    <Box key={`box-${index}`} box={box} toggleId={toggleId}/>
                 ))}
             </div>
      </div>

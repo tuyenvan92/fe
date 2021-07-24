@@ -22,7 +22,7 @@ export default function LiftingStateUp() {
     ])
     
     function toggleId() {
-        console.lof('toggleId: ')
+        console.log('toggleId: ')
     }
 
     return (
