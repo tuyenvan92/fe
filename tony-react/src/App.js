@@ -8,6 +8,8 @@ import Button from './components/Button';
 import StatefulComponent  from './components/StatefulComponent';
 import HanldeEvent  from './components/HandleEvent';
 import ConditionRendering from './components/ConditionRender';
+import LifitingStateUp from './components/LifitingStateUp';
+import Forms from './components/Forms';
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
@@ -95,6 +97,14 @@ function App() {
       ---------------------------
       <h1>Conditional Rendering</h1>
       <ConditionRendering />
+
+      ------------------------
+      <h1>Lifiting State Up</h1>
+      <LifitingStateUp />
+
+      --------------------------------------------------------------------
+      <h2>Forms</h2>
+      <Forms />
     </div>
   )
   
