@@ -7,8 +7,6 @@ function Box() {
        </div>
     );
 }
- 
-
 export default function GenerateBox() {
     const [value, setValue] = useState("");
     const handleSubmit = e => {
@@ -30,9 +28,7 @@ export default function GenerateBox() {
           </div>
         );
     }
-    
     let newValue = parseInt(value)
-
     const [todos, setTodos] = useState([]);
      const addTodo = text => {
         const newTodos = [...todos, { text }];

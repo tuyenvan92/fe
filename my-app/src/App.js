@@ -8,8 +8,7 @@ import SampleScore from './SampleScore';
 //import LearnStateHooks from './LearnStateHooks'
 //import { StatefulComponent } from './component/StatefulComponent';
 
-<<<<<<< HEAD
-import Comment from './SampleApp-Comment';
+//import Comment from './SampleApp-Comment';
 import GuestGreeting from './SampleApp-GuestGreeting'
 import UserGreeting from './SampleApp-UserGreeting';
 import UpdateStateObject from './component/UpdateStateObject'
@@ -18,12 +17,12 @@ import ConditionRender from './component/ConditionalRender';
 import GenerateBox from './SampleApp-GenerateBox';
 
 
-=======
-import UpdateStateObject from './component/UpdateStateObject';
->>>>>>> b3e41a844595964b78b21d90b5053ac28e0fb757
 
 // Sample App
 import ComposeComponent from './sampleApp/ComposeComponent/ComposeComponent';
+
+
+import LiftingStateUp from './component/LiftingStateUp';
 
 
 // function App() {
@@ -131,7 +130,6 @@ function App() {
   //   }
   // }
   
-<<<<<<< HEAD
   const comment = {
     date : new Date(),
     text : 'I hope you enjoy learning React',
@@ -152,8 +150,6 @@ function App() {
     fontWeight: 'bold'
   }
 
-=======
->>>>>>> b3e41a844595964b78b21d90b5053ac28e0fb757
   return (
     <Fragment>
       
@@ -171,7 +167,6 @@ function App() {
       <LearnStateHooks/>
       <LearnProps firstName='tuyen' lastName='van'/>
       <StatefulComponent/> */}
-<<<<<<< HEAD
       <Comment date={comment.date} text={comment.text} author={comment.author}/>
       <GuestGreeting/>
       <UserGreeting text={user.text} name={user.name}/>
@@ -185,13 +180,7 @@ function App() {
 
       <GenerateBox/>
 
-=======
-
-      <ComposeComponent />
-      <br />
-      --------------------------------------------------------------------
-      <UpdateStateObject />
->>>>>>> b3e41a844595964b78b21d90b5053ac28e0fb757
+      <h1>Lifting State Up</h1>
     </Fragment>
   )
 }
