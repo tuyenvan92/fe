@@ -16,6 +16,9 @@ import ConditionRender from './component/ConditionalRender';
 import ComposeComponent from './sampleApp/ComposeComponent/ComposeComponent';
 import GenerateBox from './sampleApp/GenerateBox/GenerateBox';
 
+import LiftingStateUp from './component/LiftingStateUp';
+
+
 // function App() {
 //   const element = <h1>Start react</h1>
 //   return (
