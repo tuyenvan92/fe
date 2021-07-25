@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 
 // components
 import SampleScores from './SampleScores';
@@ -10,6 +10,7 @@ import HanldeEvent  from './components/HandleEvent';
 import ConditionRendering from './components/ConditionRender';
 import LifitingStateUp from './components/LifitingStateUp';
 import Forms from './components/Forms';
+import UseEffectHook from './components/UseEffectHook';
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
@@ -20,6 +21,7 @@ const dataUsers = {
 }
 
 function App() {
+  const [isMountTodos, setIsMountTodos] = useState(true)
   // way 1 element:
   const element = <h1>hello word</h1>;
   // way 2 element:
@@ -105,6 +107,14 @@ function App() {
       --------------------------------------------------------------------
       <h2>Forms</h2>
       <Forms />
+
+      --------------------------------------------------------------------
+      <h2>useEffect hooks</h2>
+      {isMountTodos && <UseEffectHook /> }
+
+      <button type="button" onClick={() => setIsMountTodos(prevState => !prevState)}>mount todos</button>
+
+
     </div>
   )
   

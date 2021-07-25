@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 
 function HandleEvent() {
-  const [count, setCount] = useState(1);
+  const [count] = useState(1);
 
   function handleShoot(item) {
     console.log('handleShoot: ', item)

@@ -1,30 +1,37 @@
 import React from 'react'
 
 function Forms() {
-  const [firstName, setFirstName] = React.useState('');
-  const [gender, setGender] = React.useState('');
+  const [forms, setForms] = React.useState({
+    firstName: '',
+    lastName: '',
+    gender: ''
+  });
+  const [isErrorFirstName, setIsErrorFirstName] = React.useState(false);
 
-  function onChangeName(event) {
-    const { value } = event.target;
-    setFirstName(value)
-  }
-
-  function onChangeGender(event) {
-    const { value } = event.target;
-    setGender(value)
+  function onChange(event) {
+    const { name, value } = event.target;
+    setForms({
+      ...forms,
+      [name]: value
+    })
   }
 
   function handleSubmit() {
-    console.log('submit: ', firstName, gender)
+    if(forms.firstName === '') {
+      setIsErrorFirstName(true);
+    }
   }
-  
+
   return (
     <div>
-      FirstName: {firstName}
+      First Name: <input type="text" name="firstName" value={forms.firstName} onChange={onChange} />
       <br />
-      <input type="text" value={firstName} onChange={onChangeName} />
+      {isErrorFirstName && <div>please enter first name</div>}
+      <br/>
+      Last Name: <input type="text" name="lastName" value={forms.lastName} onChange={onChange} />
       <br />
-      <select value={gender} onChange={onChangeGender}>
+      Gender:
+      <select value={forms.gender} name="gender" onChange={onChange}>
         <option disabled value="">Please choose</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
