@@ -2,21 +2,28 @@
 import './App.css';
 import {Fragment} from 'react';
 // component
-import SampleScore from './SampleScore';
-//import LearnProps from './LearnProps'
+// import SampleScore from './SampleScore';
+// import LearnProps from './LearnProps'
 
-//import LearnStateHooks from './LearnStateHooks'
-//import { StatefulComponent } from './component/StatefulComponent';
+// import LearnStateHooks from './LearnStateHooks'
+// import { StatefulComponent } from './component/StatefulComponent';
 
-import UpdateStateObject from './component/UpdateStateObject'
-import HandleEvent from './component/HandleEvent'
-import ConditionRender from './component/ConditionalRender';
+// import UpdateStateObject from './component/UpdateStateObject'
+// import HandleEvent from './component/HandleEvent'
+// //import ConditionRender from './component/ConditionalRender';
 
-// Sample App
-import ComposeComponent from './sampleApp/ComposeComponent/ComposeComponent';
-import GenerateBox from './sampleApp/GenerateBox/GenerateBox';
+// // Sample App
+// import ComposeComponent from './sampleApp/ComposeComponent/ComposeComponent';
+// import GenerateBox from './sampleApp/GenerateBox/GenerateBox';
 
-import LiftingStateUp from './component/LiftingStateUp';
+// import LiftingStateUp from './component/LiftingStateUp';
+// import Forms from './component/Forms'
+//import UseEffectHook from './component/UseEffectHook'
+
+import FormSammpleApp from './sampleApp/Form/FormSampleApp';
+//import Forms from './component/Forms';
+
+import BoxesColor from './sampleApp/BoxesColor/BoxesColor';
 
 
 // function App() {
@@ -125,29 +132,31 @@ function App() {
   // }
   
 
-  const mystyle = {
-    color: '#f00', 
-    fontSize: '18px', 
-    fontWeight: 'bold'
-  }
+  // const mystyle = {
+  //   color: '#f00', 
+  //   fontSize: '18px', 
+  //   fontWeight: 'bold'
+  // }
+
+  //const [isMountTodos, setIsMountTodos] = useState(true)
 
   return (
     <Fragment>
       
 
-      {/* <div>
-        this is app {element} <br/> {element_2}
-        2+2
-        <br/>
-        {formatUsers(dataUsers)}
-        {renderGetting('tuyen')}
-        {renderSwitch('abc')}
-      </div>
-      <ComponentA/>
-      <SampleScore/>
+      {/* {<div>
+          this is app {element} <br/> {element_2}
+          2+2
+          <br/>
+          {formatUsers(dataUsers)}
+          {renderGetting('tuyen')}
+          {renderSwitch('abc')}
+      </div> */}
+
+      {/* <SampleScore/>
       <LearnStateHooks/>
       <LearnProps firstName='tuyen' lastName='van'/>
-      <StatefulComponent/> */}
+      <StatefulComponent/>
       <UpdateStateObject/>
       <HandleEvent/>
       <ConditionRender/>
@@ -165,6 +174,24 @@ function App() {
       <br />
       --------------------------------------------------------------------
       <UpdateStateObject />
+      <Forms/>
+      <LiftingStateUp/> */}
+
+      {/* {isMountTodos && <UseEffectHook/>}
+      <button type="button" onClick={() =>setIsMountTodos(prevState => ! prevState)}>mount todos</button> */}
+
+      {/* <Forms/>*/}
+      --------------------------------------------------------------------
+      <h1>Sample App - Form</h1>
+      <FormSammpleApp/>
+      <br/>
+      <br/>
+      --------------------------------------------------------------------
+      <h1>Sample App - Boxes Color</h1>
+      <BoxesColor/>
+
+
+
     </Fragment>
   )
 }
