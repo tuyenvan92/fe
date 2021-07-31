@@ -11,9 +11,13 @@ import ConditionRendering from './components/ConditionRender';
 import LifitingStateUp from './components/LifitingStateUp';
 import Forms from './components/Forms';
 import UseEffectHook from './components/UseEffectHook';
+import BooksStore from './components/BooksStore/BooksStore';
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
+
+// context
+import { BooksProvider } from './context/BooksContext';
 
 const dataUsers = {
   firstName: 'nguyen',
@@ -113,6 +117,14 @@ function App() {
       {isMountTodos && <UseEffectHook /> }
 
       <button type="button" onClick={() => setIsMountTodos(prevState => !prevState)}>mount todos</button>
+
+      --------------------------------------------------------------------
+      <h2>useContext</h2>
+      <h3>Books Store</h3>
+
+      <BooksProvider>
+        <BooksStore />
+      </BooksProvider>
 
 
     </div>
