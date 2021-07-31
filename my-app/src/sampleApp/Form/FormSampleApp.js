@@ -2,81 +2,41 @@ import React, { Fragment, useState } from 'react'
 export default function FormSammpleApp() {
     const [forms, setForms] = useState({
         fullname:'',
-        gender:'',
+        gender:'male',
         bio:'',
         email:'',
         password:'',
-        confirmpassword:'',
-        policy:''
+        confirmpassword:''
     });
-
-    const [isErrorFullname, setIsErrorFullname] = useState(false);
-    const [isErrorBio, setIsErrorBio] = useState(false);
-    const [isErrorEmail, setIsErrorEmail] = useState(false);
-    const [isErrorPassword, setIsErrorPassword] = useState(false);
-    const [isErrorConfirmPassword, setIsErrorConfirmPassword] = useState(false);
-    const [isErrorPolicy, setIsErrorPolicy] = useState(false);
-    const [isSamePassword, setIsSamePassword] = useState(false)
+    const [isSubmit, setIsSubmit] = useState(false);
 
     function onChange(event) {
         const {name, value} = event.target;
 
-        switch (name) {
-            case 'fullname':
-                setForms({...forms, fullname: value})
-                break;
-            case 'gender':
-                setForms({...forms, gender: value})
-                break;
-            case 'bio':
-                setForms({...forms, bio: value})
-                break;
-            case 'email':
-                setForms({...forms, email: value})
-                    break;
-            case 'password':
-                setForms({...forms, password: value})
-                break;
-            case 'confirmpassword':
-                setForms({...forms, confirmpassword: value})
-                break;
-            case 'policy':
-                setForms({...forms, policy: value})
-                break;
-            default:
-                break;
-        }
+        setForms(prevState => {
+            return {
+                ...prevState,
+                [name]: value
+            }
+        })
     }
 
     function handleSubmit() {
-        if (forms.fullname === '') {
-            setIsErrorFullname(true);
-        } 
-        if (forms.bio === '') {
-            setIsErrorBio(true);
+        setIsSubmit(true);
+        const isErrors = Object.keys(forms).filter(ele => forms[ele] === '')
+        if(isErrors.length > 0 || forms.confirmpassword !== forms.password) {
+            // something
+            console.log('please check forms input again')
+            return
         }
-        if (forms.email === '') {
-            setIsErrorEmail(true);
-        }
-        if (forms.password === '') {
-            setIsErrorPassword(true);
-        }
-        if (forms.confirmpassword === '') {
-            setIsErrorConfirmPassword(true);
-        }
-        if (forms.confirmpassword !== forms.password) {
-            setIsSamePassword(true)
-        }
-        if (forms.policy === '') {
-            setIsErrorPolicy(true);
-        }
+         // call api
+         console.log('call api: ', forms)
     }
 
-    
     return (
         <Fragment>
             Full Name:<br/> <input type="text" name="fullname" value={forms.fullname} onChange={onChange}/>
-                      <br/> {isErrorFullname && <div style={{color: "red", fontSize: 13, marginTop:5}}>Please enter your full name</div>}
+                      <br/> {isSubmit && forms.fullname === '' && <div style={{color: "red", fontSize: 13, marginTop:5}}>Please enter your full name</div>}
                       <br/> 
 
             Gender:   <br/> <select name="gender" value={forms.gender} onChange={onChange}>
@@ -87,27 +47,23 @@ export default function FormSammpleApp() {
                       <br/> 
 
             Bio:      <br/> <input type="text" name="bio" value={forms.bio} onChange={onChange}></input>
-                      <br/> {isErrorBio && <div style={{color: "red", fontSize: 13, marginTop:5}}>Please enter your bio</div>}
+                      <br/> {isSubmit && forms.bio === '' && <div style={{color: "red", fontSize: 13, marginTop:5}}>Please enter your bio name</div>}
                       <br/> 
+                      
 
 
             Email:    <br/> <input type="email" name="email" value={forms.email} onChange={onChange}></input>
-                      <br/> {isErrorEmail && <div style={{color: "red", fontSize: 13, marginTop:5}}>Please enter your email</div>}
+                      <br/> {isSubmit && forms.email === '' && <div style={{color: "red", fontSize: 13, marginTop:5}}>Please enter your email</div>}
                       <br/> 
 
             Password: <br/> <input type="password" name="password" value={forms.password} onChange={onChange}></input>  
-                      <br/> {isErrorPassword && <div style={{color: "red", fontSize: 13, marginTop:5}}>Please enter password</div>}
+                      <br/> {isSubmit && forms.fullname === '' && <div style={{color: "red", fontSize: 13, marginTop:5}}>Please enter your password</div>}
                       <br/> 
 
         Confirm Password: <br/> <input type="password" name="confirmpassword" value={forms.confirmpassword} onChange={onChange}></input>       
-                        <br/>   {isErrorConfirmPassword && <div style={{color: "red", fontSize: 13, marginTop:5}}>Please enter confirm password</div>}
-                                {isSamePassword && <div style={{color: "red", fontSize: 13, marginTop:5}}>Password and confirm password do not match</div>}
+                        <br/>   {isSubmit && forms.confirmpassword === '' && <div style={{color: "red", fontSize: 13, marginTop:5}}>Please enter your confirm password</div>}
+                                {forms.confirmpassword !== forms.password && <div style={{color: "red", fontSize: 13, marginTop:5}}>Password and confirm password do not match</div>}
                        <br/> 
-            
-             <input type="checkbox" id="policy" name="policy" checked={forms.policy} onChange={onChange}/> I Agree to Privacy Policy 
-             <br/>   {isErrorPolicy && <div style={{color: "red", fontSize: 13, marginTop:5}}>Please select the checkbox</div>}
-             <br/> 
-
             
             
             <button type="button" onClick={handleSubmit}>Submit</button>
