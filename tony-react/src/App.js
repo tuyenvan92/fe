@@ -12,6 +12,7 @@ import LifitingStateUp from './components/LifitingStateUp';
 import Forms from './components/Forms';
 import UseEffectHook from './components/UseEffectHook';
 import BooksStore from './components/BooksStore/BooksStore';
+import UseReducerCounter from './components/UseReducerCounter/UseReducerCounter';
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
@@ -117,7 +118,7 @@ function App() {
       {isMountTodos && <UseEffectHook /> }
 
       <button type="button" onClick={() => setIsMountTodos(prevState => !prevState)}>mount todos</button>
-
+      <br />
       --------------------------------------------------------------------
       <h2>useContext</h2>
       <h3>Books Store</h3>
@@ -126,7 +127,10 @@ function App() {
         <BooksStore />
       </BooksProvider>
 
-
+      --------------------------------------------------------------------
+      <h2>useReducer</h2>
+      <h3>Counter</h3>
+      <UseReducerCounter />
     </div>
   )
   

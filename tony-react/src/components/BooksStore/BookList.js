@@ -3,7 +3,7 @@ import React, { Fragment, useContext } from 'react';
 import { BooksContext } from '../../context/BooksContext';
 
 export default function BookList() {
-  const { books } = useContext(BooksContext);
+  const { books, handleDeleteBook } = useContext(BooksContext);
 
   return (
     <div>
@@ -11,10 +11,11 @@ export default function BookList() {
       {books.length > 0 ? (
         <>
           {books.map((book, idx) => (
-            <Fragment key={`${book.title}-${idx}`}>
+            <Fragment key={book.id}>
               <div>
                 Title: {book.title} <br />
                 Price: {book.price}
+                <button type="button" onClick={() => handleDeleteBook(book.id)}>Delete</button>
               </div>
               <br />
             </Fragment>
