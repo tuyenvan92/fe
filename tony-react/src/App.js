@@ -13,6 +13,8 @@ import Forms from './components/Forms';
 import UseEffectHook from './components/UseEffectHook';
 import BooksStore from './components/BooksStore/BooksStore';
 import UseReducerCounter from './components/UseReducerCounter/UseReducerCounter';
+import UseRefHook from './components/UseRefHook';
+import MemoHook from './components/MemoHook';
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
@@ -26,6 +28,14 @@ const dataUsers = {
 }
 
 function App() {
+  const [countMemo, setCountMemo] = useState(0);
+  // firstRender -> memory A
+  // next render -> memory B
+  const title = { 
+    title: 'harry potter',
+    price: 10
+  };
+
   const [isMountTodos, setIsMountTodos] = useState(true)
   // way 1 element:
   const element = <h1>hello word</h1>;
@@ -131,6 +141,17 @@ function App() {
       <h2>useReducer</h2>
       <h3>Counter</h3>
       <UseReducerCounter />
+
+      --------------------------------------------------------------------
+      <h2>useRef hooks</h2>
+      <UseRefHook />
+
+      --------------------------------------------------------------------
+      <h2>memo hooks</h2>
+      countMemo: {countMemo}
+      <button type="button" onClick={() => setCountMemo(prevState => prevState + 1)}>increment counter</button>
+      <MemoHook title={title} />
+
     </div>
   )
   
