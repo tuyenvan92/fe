@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useCallback } from 'react';
 
 // components
 import SampleScores from './SampleScores';
@@ -31,10 +31,13 @@ function App() {
   const [countMemo, setCountMemo] = useState(0);
   // firstRender -> memory A
   // next render -> memory B
-  const title = { 
+
+
+  const books = { 
     title: 'harry potter',
     price: 10
   };
+  //  const books =  "test memo"
 
   const [isMountTodos, setIsMountTodos] = useState(true)
   // way 1 element:
@@ -64,6 +67,12 @@ function App() {
       <div>hello strange</div>
     )
   }
+
+  const handleTitleBook = useCallback(() => {
+    console.log('handleTitleBook')
+  }, [])
+  // first render: memory A
+  // next render: memory A
  
   return (
     <div>
@@ -150,7 +159,7 @@ function App() {
       <h2>memo hooks</h2>
       countMemo: {countMemo}
       <button type="button" onClick={() => setCountMemo(prevState => prevState + 1)}>increment counter</button>
-      <MemoHook title={title} />
+      <MemoHook title="truong" handleTitleBook={handleTitleBook}  />
 
     </div>
   )

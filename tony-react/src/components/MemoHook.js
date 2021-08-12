@@ -4,7 +4,7 @@ function MemoHook({ title }) {
   console.log("render memo hooks: ", title)
   return (
     <div>
-      memo
+      title: {title}
     </div>
   )
 }
