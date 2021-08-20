@@ -1,6 +1,6 @@
 //import logo from './logo.svg';
 import './App.css';
-import {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 // component
 // import SampleScore from './SampleScore';
 // import LearnProps from './LearnProps'
@@ -20,10 +20,23 @@ import {Fragment} from 'react';
 // import Forms from './component/Forms'
 //import UseEffectHook from './component/UseEffectHook'
 
-import FormSammpleApp from './sampleApp/Form/FormSampleApp';
-//import Forms from './component/Forms';
+// import FormSammpleApp from './sampleApp/Form/FormSampleApp';
+// //import Forms from './component/Forms';
 
-import BoxesColor from './sampleApp/BoxesColor/BoxesColor';
+// import BoxesColor from './sampleApp/BoxesColor/BoxesColor';
+
+// import BooksStore from './component/BookStore/BooksStore';
+// import { BooksProvider } from './context/BooksContext';
+
+// import UseReducerCounter from './component/UseReducerCounter/UseReducerCounter'
+// import UseRefHook from './component/useRef'
+
+//import MemoBook from'./component/Memo/MemoBook'
+
+import MoviesStore from './sampleApp/MovieFilm/MoviesStore'
+import {MoviesProvider} from './context/MoviesContext'
+
+import BigLists from './sampleApp/BigLists/BigLists';
 
 
 // function App() {
@@ -139,6 +152,29 @@ function App() {
   // }
 
   //const [isMountTodos, setIsMountTodos] = useState(true)
+  //const [, setCountMemo] = useState(0)
+  //const[title] = useState('memo-component')
+  
+
+  // const books = {
+  //   title:'tuyen',
+  //   price: 20
+  // }
+
+
+  // function handleTitleBook() {
+  //   console.log('handleTitleBook')
+  // }
+
+  // const handleTitleBook = useCallback(() => {
+  //   console.log('handleTitleBook')
+  // },[])
+  const [value, setValue] = useState(0);
+  const handleClick = React.useCallback((item) => {
+    setValue(item);
+  }, []);
+  console.log("You clicked ", value);
+
 
   return (
     <Fragment>
@@ -182,13 +218,36 @@ function App() {
 
       {/* <Forms/>*/}
       --------------------------------------------------------------------
-      <h1>Sample App - Form</h1>
-      <FormSammpleApp/>
+      {/* <h1>Sample App - Form</h1> */}
+      {/* <FormSammpleApp/>
       <br/>
       <br/>
       --------------------------------------------------------------------
       <h1>Sample App - Boxes Color</h1>
       <BoxesColor/>
+      --------------------------------------------------------------------
+ 
+      
+      <h1> UseReducerCounter </h1>
+      <UseReducerCounter/>
+      <UseRefHook/> */}
+      --------------------------------------------------------------------
+      {/* <h1>useContext - Book Store</h1>
+      <BooksProvider>
+        <BooksStore/>
+      </BooksProvider> */}
+
+      --------------------------------------------------------------------
+     {/* <h2>Memo</h2>
+      <button type="button" onClick={() => setCountMemo(prevState => prevState + 1)}>Increment</button>
+      <MemoBook title="truong" handleTitleBook={handleTitleBook}/> */}
+      --------------------------------------------------------------------
+      <h2>Sample App: Movie Film</h2>
+      <MoviesProvider>
+        <MoviesStore/>
+      </MoviesProvider>
+      --------------------------------------------------------------------
+      <BigLists handleClick={handleClick}/>
 
 
 
