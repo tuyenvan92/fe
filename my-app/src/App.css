@@ -1,7 +1,5 @@
 .App {
   text-align: center;
-  --bg-red: red;
-  --bg-blue: blue;
 }
 
 .App-logo {
@@ -37,67 +35,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.box {
-  background-color: gray;
-  margin: 5px;
-  padding: 10px;
-  color: white;
-  display: inline-block;
-}
-.square {
-  width: 100px;
-  height:100px;
-  color: black;
-  font-weight: 700;
-  text-align: center;
-  cursor: pointer;
-}
-
-.red {
-  background-color:var(--boxColor);
-}
-.gold {
-  background-color: gold;
-}
-.aqua {
-  background-color: aqua;
-}
-.purple {
-  background-color: purple;
-}
-
-
-.container {
-  --btn-bg-color-one: red;
-  --btn-bg-color-two: gold;
-  --btn-bg-color-three: aqua;
-  --btn-bg-color-four: purple;
-
-}
-.btn {
-  /* background-color: var(--btn-bg-color); */
-  color: black;
-  
-  padding: 15px 30px;
-  border-color: white;
-  cursor: pointer;
-  width: 150px;
-  height:150px;
-  font-weight: 700;
-  font-size: 15px;
-  color:black;
-}
-.one {
-  background-color: var(--btn-bg-color-one);
-}
-.two {
-  background-color: var(--btn-bg-color-two);
-}
-.three {
-  background-color: var(--btn-bg-color-three);
-}
-.four {
-  background-color: var(--btn-bg-color-four);
 }

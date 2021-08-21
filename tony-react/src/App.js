@@ -22,6 +22,9 @@ import ComposeComponent from './ComposeComponent/ComposeComponent';
 // context
 import { BooksProvider } from './context/BooksContext';
 
+// hooks
+import useResizeWindow from './hooks/useResizeWindow';
+
 const dataUsers = {
   firstName: 'nguyen',
   lastName: 'tony'
@@ -29,9 +32,10 @@ const dataUsers = {
 
 function App() {
   const [countMemo, setCountMemo] = useState(0);
+  const { isSmallScreen } = useResizeWindow(true);
+  
   // firstRender -> memory A
   // next render -> memory B
-
 
   const books = { 
     title: 'harry potter',
@@ -160,6 +164,11 @@ function App() {
       countMemo: {countMemo}
       <button type="button" onClick={() => setCountMemo(prevState => prevState + 1)}>increment counter</button>
       <MemoHook title="truong" handleTitleBook={handleTitleBook}  />
+
+      --------------------------------------------------------------------
+      <h2>custom hook resize window</h2>
+        
+      {isSmallScreen ? <h2>small screen</h2> : <h2> large screen</h2>}
 
     </div>
   )
