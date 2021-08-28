@@ -1,52 +1,45 @@
-import React from'react'
+import React, { useEffect, useState } from'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-export default function KanbanBoard() {
-    //let listTodo;
-    fetch(`https://tony-json-server.herokuapp.com/api/todos`, {
-        method:'GET',
-    })
-    .then(res => res.json())
-    .then(res => {
-        //listTodo = res.data;
-        fetchTodos(res.data)
-    })
-    // const newTodo = {
-    //     id: Date.now().toString()
-    // }
-    function fetchTodos(list) {
-        const cardTodos = document.getElementById('cardTodos')
-        cardTodos.innerHTML = ''; 
+// apis
+import * as todoApi from '../../apis/todoApi';
 
-        for (const index in list) {
-            cardTodos.innerHTML +=
-            `<div class="issue">${list[index].title}</div>
-            <div class="button-group">
-                <button className="edit-button button">EDIT</button>
-                <button className="view-button button">VIEW</button>
-                <p className="author">${list[index].author}n</p>
-            </div>`
+export default function KanbanBoard() {
+    // States
+    const [todos, setTodos] = useState([])
+
+    // fetch todo list after component mounted
+    useEffect(() => {
+        async function fetchTodos() {
+            const res = await todoApi.fetchTodos();
+            setTodos(res.data);
         }
-    }
+        fetchTodos();
+    }, [])
+
     return (
         <div className="KanbanBoard">
             <div className="top-part">
                 <div className="title">Kanban Board</div>
-                <div class="add-task"><FontAwesomeIcon icon={faPlus} className="icon"/> ADD TASK</div>
+                <div className="add-task"><FontAwesomeIcon icon={faPlus} className="icon"/> ADD TASK</div>
             </div>
             <div className="board">
                 <div className="new column">
                     <div className="column-title orange">New</div>
                     <div className="new-groups">
-                        <div className="card cardTodos" id="cardTodos">
-                            {/* <div class="issue">Learn react</div>
-                            <div class="button-group">
-                                <button className="edit-button button">EDIT</button>
-                                <button className="view-button button">VIEW</button>
-                                <p className="author">Tony Nguyen</p>
-                            </div> */}
-                        </div>
+                        {todos.map(todo => (
+                                <div className="card cardTodos" id="cardTodos">
+                                <div className="issue">{todo.title}</div>
+                                <div className="button-group">
+                                    <div>
+                                        <button className="edit-button button">EDIT</button>
+                                        <button className="view-button button">VIEW</button>
+                                    </div>
+                                    <p className="author">{todo.author}</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
                 <div className="processing column">
