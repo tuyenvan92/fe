@@ -1,6 +1,6 @@
 //import logo from './logo.svg';
 import './App.css';
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 // component
 // import SampleScore from './SampleScore';
 // import LearnProps from './LearnProps'
@@ -37,6 +37,7 @@ import MoviesStore from './sampleApp/MovieFilm/MoviesStore'
 import {MoviesProvider} from './context/MoviesContext'
 
 import BigLists from './sampleApp/BigLists/BigLists';
+import useResizeWindow from './hooks/useResizeWindow';
 
 
 // function App() {
@@ -248,7 +249,10 @@ function App() {
       </MoviesProvider>
       --------------------------------------------------------------------
       <BigLists handleClick={handleClick}/>
+      --------------------------------------------------------------------
+      <h2>custom hook resize window</h2>
 
+      <useResizeWindow/>
 
 
     </Fragment>
