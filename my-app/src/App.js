@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //import logo from './logo.svg';
 import './App.css';
 import React, {Fragment, useState, useEffect} from 'react';
@@ -92,175 +93,191 @@ import useResizeWindow from './hooks/useResizeWindow';
 //       <div>this is Component A</div>
 //     )
 // }
+=======
+import { Fragment, useState, useCallback } from 'react';
+
+// components
+import SampleScores from './SampleScores';
+import LearnProps from './LearnProps';
+import LearnStateHooks from './LearnStateHooks';
+import Button from './components/Button';
+import StatefulComponent  from './components/StatefulComponent';
+import HanldeEvent  from './components/HandleEvent';
+import ConditionRendering from './components/ConditionRender';
+import LifitingStateUp from './components/LifitingStateUp';
+import Forms from './components/Forms';
+import UseEffectHook from './components/UseEffectHook';
+import BooksStore from './components/BooksStore/BooksStore';
+import UseReducerCounter from './components/UseReducerCounter/UseReducerCounter';
+import UseRefHook from './components/UseRefHook';
+import MemoHook from './components/MemoHook';
+
+// Sample App
+import ComposeComponent from './ComposeComponent/ComposeComponent';
+
+// context
+import { BooksProvider } from './context/BooksContext';
+
+// hooks
+import useResizeWindow from './hooks/useResizeWindow';
+
+const dataUsers = {
+  firstName: 'nguyen',
+  lastName: 'tony'
+}
+>>>>>>> 40c5ff226e42765e30a16be95610841e6d64875d
 
 function App() {
-  // way 1
-  // const element = <h1>hello world</h1>;
-  // //way 2
-  // const element_2 = (
-  //   <h1>hello world</h1>
-  // )
-
-  // const formatUsers = (users) => {
-  //   return `${users.lastName} ${users.firstName}`
-  // }
-
-  // const renderGetting = user => {
-  // //   if (user) {
-  // //     return (
-  // //       <div>Hello, {user}</div>
-  // //     )
-  // //   }
-  //   // return (
-  //   //   <div>Hello, Stranger</div>
-  //   // )
-
-
-  //   if (user) {
-  //     return (
-  //       <Fragment>
-  //         <div>Hello {user}</div>
-  //         <div>Hello 2 {user}</div>
-  //         <div>Hello 3 {user}</div>
-  //       </Fragment>
-  //     )
-  //   }
-  //   return (
-  //     <div>Hello, Stranger</div>
-  //   )
-  // }
-
-  // const renderSwitch = user => {
-  //   switch (user) {
-  //     case 'tuyen':
-  //       return (
-  //         <div>Hi, Tuyen</div>
-  //       )
-  //     case 'abc':
-  //       return (
-  //         <div>Hi, abc</div>
-  //       )
-  //     default:
-  //       return <Fragment/>
-  //   }
-  // }
+  const [countMemo, setCountMemo] = useState(0);
+  const { isSmallScreen } = useResizeWindow(true);
   
+  // firstRender -> memory A
+  // next render -> memory B
 
-  // const mystyle = {
-  //   color: '#f00', 
-  //   fontSize: '18px', 
-  //   fontWeight: 'bold'
-  // }
+  const books = { 
+    title: 'harry potter',
+    price: 10
+  };
+  //  const books =  "test memo"
 
-  //const [isMountTodos, setIsMountTodos] = useState(true)
-  //const [, setCountMemo] = useState(0)
-  //const[title] = useState('memo-component')
-  
+  const [isMountTodos, setIsMountTodos] = useState(true)
+  // way 1 element:
+  const element = <h1>hello word</h1>;
+  // way 2 element:
+  const element_2 = (
+    <h1>hello word</h1>
+  )
 
-  // const books = {
-  //   title:'tuyen',
-  //   price: 20
-  // }
+  const num = 2 + 2;
+  const formatUsers = (users) => {
+    return `${users.lastName} ${users.firstName}`
+  }
 
+  const renderGetting = user => {
+    if(user) {
+      return (
+        <Fragment>
+          <div>Hello {user}</div>
+          <div>Hello 2 {user}</div>
+          <div>Hello 3 {user}</div>
+        </Fragment>
+      )
+    }
 
-  // function handleTitleBook() {
-  //   console.log('handleTitleBook')
-  // }
+    return (
+      <div>hello strange</div>
+    )
+  }
 
-  // const handleTitleBook = useCallback(() => {
-  //   console.log('handleTitleBook')
-  // },[])
-  const [value, setValue] = useState(0);
-  const handleClick = React.useCallback((item) => {
-    setValue(item);
-  }, []);
-  console.log("You clicked ", value);
-
-
+  const handleTitleBook = useCallback(() => {
+    console.log('handleTitleBook')
+  }, [])
+  // first render: memory A
+  // next render: memory A
+ 
   return (
-    <Fragment>
+    <div>
+      this is app {element} <br/> {element_2}
+      {num}
+      <br />
+      {formatUsers(dataUsers)}
+
       
+      {renderGetting('tuyen')}
 
-      {/* {<div>
-          this is app {element} <br/> {element_2}
-          2+2
-          <br/>
-          {formatUsers(dataUsers)}
-          {renderGetting('tuyen')}
-          {renderSwitch('abc')}
-      </div> */}
+      <img src="abc" className="image_default" alt="docs" />
 
-      {/* <SampleScore/>
-      <LearnStateHooks/>
-      <LearnProps firstName='tuyen' lastName='van'/>
-      <StatefulComponent/>
-      <UpdateStateObject/>
-      <HandleEvent/>
-      <ConditionRender/>
+      <br />
 
-      <h3 style={mystyle}>Style JSX</h3>
+      <h3 
+        style={{ 
+          color: '#f00', 
+          fontSize: '18px', 
+          fontWeight: 'bold' 
+        }}
+      >
+        Render JSX with React function component
+      </h3>
 
-      <SampleScore/>
+      <SampleScores />
+      <LearnProps 
+        firstName="truong" 
+        lastName="tony"
+        className="learn-props"
+        gender="male"
+      />
+
+      <LearnStateHooks />
+      <StatefulComponent />
+
+      <Button />
+      <Button text="tuyen" />
+      <Button text="minh" />
+
+      <h1>Sample App</h1>
+      <ComposeComponent />
+
+      -----------------------------
+      <h1>HandleEvent</h1>
+      <HanldeEvent />
+
+      ---------------------------
+      <h1>Conditional Rendering</h1>
+      <ConditionRendering />
+
+      ------------------------
+      <h1>Lifiting State Up</h1>
+      <LifitingStateUp />
 
       --------------------------------------------------------------------
-      <h2>Sampel App - GenerateBox</h2>
-      <GenerateBox/>
+      <h2>Forms</h2>
+      <Forms />
 
+      --------------------------------------------------------------------
+      <h2>useEffect hooks</h2>
+      {isMountTodos && <UseEffectHook /> }
 
-      <ComposeComponent />
+      <button type="button" onClick={() => setIsMountTodos(prevState => !prevState)}>mount todos</button>
       <br />
       --------------------------------------------------------------------
-      <UpdateStateObject />
-      <Forms/>
-      <LiftingStateUp/> */}
+      <h2>useContext</h2>
+      <h3>Books Store</h3>
 
-      {/* {isMountTodos && <UseEffectHook/>}
-      <button type="button" onClick={() =>setIsMountTodos(prevState => ! prevState)}>mount todos</button> */}
-
-      {/* <Forms/>*/}
-      --------------------------------------------------------------------
-      {/* <h1>Sample App - Form</h1> */}
-      {/* <FormSammpleApp/>
-      <br/>
-      <br/>
-      --------------------------------------------------------------------
-      <h1>Sample App - Boxes Color</h1>
-      <BoxesColor/>
-      --------------------------------------------------------------------
- 
-      
-      <h1> UseReducerCounter </h1>
-      <UseReducerCounter/>
-      <UseRefHook/> */}
-      --------------------------------------------------------------------
-      {/* <h1>useContext - Book Store</h1>
       <BooksProvider>
-        <BooksStore/>
-      </BooksProvider> */}
+        <BooksStore />
+      </BooksProvider>
 
       --------------------------------------------------------------------
-     {/* <h2>Memo</h2>
-      <button type="button" onClick={() => setCountMemo(prevState => prevState + 1)}>Increment</button>
-      <MemoBook title="truong" handleTitleBook={handleTitleBook}/> */}
+      <h2>useReducer</h2>
+      <h3>Counter</h3>
+      <UseReducerCounter />
+
       --------------------------------------------------------------------
-      <h2>Sample App: Movie Film</h2>
-      <MoviesProvider>
-        <MoviesStore/>
-      </MoviesProvider>
-      --------------------------------------------------------------------
+<<<<<<< HEAD
       <BigLists handleClick={handleClick}/>
       --------------------------------------------------------------------
       <h2>custom hook resize window</h2>
 
       <useResizeWindow/>
+=======
+      <h2>useRef hooks</h2>
+      <UseRefHook />
 
+      --------------------------------------------------------------------
+      <h2>memo hooks</h2>
+      countMemo: {countMemo}
+      <button type="button" onClick={() => setCountMemo(prevState => prevState + 1)}>increment counter</button>
+      <MemoHook title="truong" handleTitleBook={handleTitleBook}  />
+>>>>>>> 40c5ff226e42765e30a16be95610841e6d64875d
 
-    </Fragment>
+      --------------------------------------------------------------------
+      <h2>custom hook resize window</h2>
+        
+      {isSmallScreen ? <h2>small screen</h2> : <h2> large screen</h2>}
+
+    </div>
   )
+  
 }
 
-
 export default App;
-
-
-
