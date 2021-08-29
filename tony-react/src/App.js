@@ -1,4 +1,5 @@
 import { Fragment, useState, useCallback } from 'react';
+import { Link, NavLink, Redirect, Route, Switch } from 'react-router-dom';
 
 // components
 import SampleScores from './SampleScores';
@@ -15,6 +16,9 @@ import BooksStore from './components/BooksStore/BooksStore';
 import UseReducerCounter from './components/UseReducerCounter/UseReducerCounter';
 import UseRefHook from './components/UseRefHook';
 import MemoHook from './components/MemoHook';
+import About from './ReactRouter/About';
+import Policy from './ReactRouter/Policy';
+import Term from './ReactRouter/Term';
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
@@ -80,6 +84,30 @@ function App() {
  
   return (
     <div>
+      <nav>
+        <ul>
+          <li>
+            {/* <Link to="/" activeClassName="active">Sample Score</Link> */}
+            <NavLink to="/sample-score">Sample Score</NavLink> |
+            <Link to="/about">About </Link> |
+            <Link to="/term">Term</Link> |
+            <Link to="/policy">Policy</Link>
+          </li>
+        </ul>
+      </nav>
+        <Switch>
+          <Route exact path="/" component={About} />
+          <Route exact path="/sample-score" component={SampleScores} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/term" component={Term} />
+          <Route exact path="/policy" component={Policy} />
+        </Switch>
+     
+
+
+      <br /> <br /> <br />
+      ---------------------------------
+      <br /> <br />
       this is app {element} <br/> {element_2}
       {num}
       <br />
@@ -102,7 +130,6 @@ function App() {
         Render JSX with React function component
       </h3>
 
-      <SampleScores />
       <LearnProps 
         firstName="truong" 
         lastName="tony"
