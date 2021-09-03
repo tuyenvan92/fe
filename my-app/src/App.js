@@ -1,101 +1,5 @@
-<<<<<<< HEAD
-//import logo from './logo.svg';
-import './App.css';
-import React, {Fragment, useState, useEffect} from 'react';
-// component
-// import SampleScore from './SampleScore';
-// import LearnProps from './LearnProps'
-
-// import LearnStateHooks from './LearnStateHooks'
-// import { StatefulComponent } from './component/StatefulComponent';
-
-// import UpdateStateObject from './component/UpdateStateObject'
-// import HandleEvent from './component/HandleEvent'
-// //import ConditionRender from './component/ConditionalRender';
-
-// // Sample App
-// import ComposeComponent from './sampleApp/ComposeComponent/ComposeComponent';
-// import GenerateBox from './sampleApp/GenerateBox/GenerateBox';
-
-// import LiftingStateUp from './component/LiftingStateUp';
-// import Forms from './component/Forms'
-//import UseEffectHook from './component/UseEffectHook'
-
-// import FormSammpleApp from './sampleApp/Form/FormSampleApp';
-// //import Forms from './component/Forms';
-
-// import BoxesColor from './sampleApp/BoxesColor/BoxesColor';
-
-// import BooksStore from './component/BookStore/BooksStore';
-// import { BooksProvider } from './context/BooksContext';
-
-// import UseReducerCounter from './component/UseReducerCounter/UseReducerCounter'
-// import UseRefHook from './component/useRef'
-
-//import MemoBook from'./component/Memo/MemoBook'
-
-import MoviesStore from './sampleApp/MovieFilm/MoviesStore'
-import {MoviesProvider} from './context/MoviesContext'
-
-import BigLists from './sampleApp/BigLists/BigLists';
-import useResizeWindow from './hooks/useResizeWindow';
-
-
-// function App() {
-//   const element = <h1>Start react</h1>
-//   return (
-//     <div className="App">
-//       {2+2}
-//       {element}
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-
-//-----
-// export function App() {
-//   const users = {
-//     firstName: 'nguyen',
-//     lastName: 'tony'
-//   }
-
-//   const element = <h1>hello world</h1>;
-
-//   const formatUsers = () => {
-//     return `${users.lastName} ${users.firstName}`
-//   }
-
-//   //console.log(formatUsers())
-
-//   return (
-//     <div>
-//       this is app {element}
-//       2+2
-//       <br/>
-//       {formatUsers()}
-//     </div>
-//   )
-// }
-//----
-
-
-
-// const dataUsers = {
-//   firstName: 'van',
-//   lastName: 'tuyen'
-// }
-
-// function ComponentA(){
-//     return (
-//       <div>this is Component A</div>
-//     )
-// }
-=======
 import { Fragment, useState, useCallback } from 'react';
-
+import { Link, NavLink, Redirect, Route, Switch } from 'react-router-dom';
 // components
 import SampleScores from './SampleScores';
 import LearnProps from './LearnProps';
@@ -111,6 +15,11 @@ import BooksStore from './components/BooksStore/BooksStore';
 import UseReducerCounter from './components/UseReducerCounter/UseReducerCounter';
 import UseRefHook from './components/UseRefHook';
 import MemoHook from './components/MemoHook';
+//import About from './ReactRouter/About';
+import Term from './ReactRouter/Term';
+import Policy from './ReactRouter/Policy';
+import Contact from './ReactRouter/Contact'
+import Company from './ReactRouter/Company'
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
@@ -125,7 +34,6 @@ const dataUsers = {
   firstName: 'nguyen',
   lastName: 'tony'
 }
->>>>>>> 40c5ff226e42765e30a16be95610841e6d64875d
 
 function App() {
   const [countMemo, setCountMemo] = useState(0);
@@ -177,6 +85,93 @@ function App() {
  
   return (
     <div>
+      {/* <nav>
+        <ul>
+          <li>
+            <Link to="/sample-sccore">Sample Score</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Route path ="/sample-score" component={SampleScores}/> */}
+
+      <nav>
+        <ul>
+            <Link to="/"></Link>
+            <br/>
+            <br/>
+            <Link to="/sample-scores">Sample Scores</Link>
+            <br/>
+            <br/>
+            <Link to="/react-props">Learn React Props</Link>
+            <br/>
+            <br/>
+            <Link to="/state-hook">Learn State Hook</Link>
+            <br/>
+            <br/>
+            <Link to="/stateful-component">Stateful Component</Link>
+            <br/>
+            <br/>
+            <Link to="/compose-compenent">Compose Component</Link>
+            <br/>
+            <br/>
+            <Link to="/handle-event">Handle Event</Link>
+            <br/>
+            <br/>
+            <Link to="/conditional-rendering">Conditional Rendering</Link>
+            <br/>
+            <br/>
+            <Link to="/lifting-state">Lifting State Up</Link>
+            <br/>
+            <br/>
+            <Link to="/forms">Forms</Link>
+            <br/>
+            <br/>
+            <Link to="/useEffect">useEffect Hooks</Link>
+            <br/>
+            <br/>
+            <Link to="/useContext">useContext</Link>
+            <br/>
+            <br/>
+            <Link to="/useReducer">useReducer</Link>
+            <br/>
+            <br/>
+            <Link to="/useRef">useRef Hooks</Link>
+            <br/>
+            <br/>
+            <Link to="/memo-hooks">memo Hooks</Link>
+            <br/>
+            <br/>
+            <Link to="/custom-hook">custom hook resize window</Link>
+        </ul>
+      </nav>
+      <Switch>
+        {/* <Route exact path="/" component={}/> */}
+        <Route exact path="/sample-scores" component={SampleScores}/>
+        <Route exact path="/react-props" component={() => 
+          <LearnProps firstName={"truong"} lastName={"tony"} className={"learn-props"} gender={"male"}/>
+        }/>
+        <Route exact path="/state-hook" component={LearnStateHooks}/>
+        <Route exact path="/stateful-component" component={StatefulComponent}/>
+        <Route exact path="/compose-compenent" component={ComposeComponent}></Route>
+        <Route exact path="/handle-event" component={HanldeEvent }/>
+        <Route exact path="/conditional-rendering" component={ConditionRendering}/>
+
+        <Route exact path="/lifting-state" component={LifitingStateUp}/>
+        <Route exact path="/forms" component={Forms}/>
+        <Route exact path="/useEffect" component={() => {isMountTodos && <UseEffectHook/>}}><button type="button" onClick={() => setIsMountTodos(prevState => !prevState)}>mount todos</button></Route>
+        <Route exact path="/useContext" component={() => (<BooksProvider><BooksStore/></BooksProvider>)}/>
+        <Route exact path="/useReducer" component={UseReducerCounter}/>
+        <Route exact path="/useRef" component={UseRefHook}/>
+        <Route exact path="/memo-hooks" component={countMemo}>
+          <button type="button" onClick={() => setCountMemo(prevState => prevState + 1)}>increment counter</button>
+          <MemoHook title="truong" handleTitleBook={handleTitleBook}  />
+        </Route>
+        <Route exact path="/custom-hook" component={useResizeWindow}>{isSmallScreen ? <h2>small screen</h2> : <h2> large screen</h2>}</Route>
+        
+      </Switch>
+
+{/* 
       this is app {element} <br/> {element_2}
       {num}
       <br />
@@ -199,7 +194,7 @@ function App() {
         Render JSX with React function component
       </h3>
 
-      <SampleScores />
+      <SampleScores/>
       <LearnProps 
         firstName="truong" 
         lastName="tony"
@@ -210,7 +205,7 @@ function App() {
       <LearnStateHooks />
       <StatefulComponent />
 
-      <Button />
+      <Button/>
       <Button text="tuyen" />
       <Button text="minh" />
 
@@ -253,13 +248,6 @@ function App() {
       <UseReducerCounter />
 
       --------------------------------------------------------------------
-<<<<<<< HEAD
-      <BigLists handleClick={handleClick}/>
-      --------------------------------------------------------------------
-      <h2>custom hook resize window</h2>
-
-      <useResizeWindow/>
-=======
       <h2>useRef hooks</h2>
       <UseRefHook />
 
@@ -268,16 +256,47 @@ function App() {
       countMemo: {countMemo}
       <button type="button" onClick={() => setCountMemo(prevState => prevState + 1)}>increment counter</button>
       <MemoHook title="truong" handleTitleBook={handleTitleBook}  />
->>>>>>> 40c5ff226e42765e30a16be95610841e6d64875d
 
       --------------------------------------------------------------------
       <h2>custom hook resize window</h2>
         
-      {isSmallScreen ? <h2>small screen</h2> : <h2> large screen</h2>}
+      {isSmallScreen ? <h2>small screen</h2> : <h2> large screen</h2>} */}
+      --------------------------------------------------------------------
+
+      <div>
+        <aside>
+          <Link to="/about">About</Link>
+          <Link to="/term">Term</Link>
+          <Link to="/policy">Policy</Link>
+          {/* <Link to="/company">Company</Link>
+          <Link to="/contact">Contact</Link> */}
+        </aside>
+        <main>
+          <Route path='/about' component={About}/>
+          <Route path='/term' component={Term}/>
+          <Route path='/policy' component={Policy}/>
+        </main>
+      </div>
+
 
     </div>
   )
-  
 }
 
 export default App;
+
+function About() {
+  return (
+    <div>
+      This is About
+      <aside>
+        <Link to="/about/company">Company</Link>
+        <Link to="/about/contact">Contact</Link>
+      </aside>
+        <main>
+          <Route path='/about/company' component={Company}/>
+          <Route path='/about/contact' component={Contact}/>
+        </main>
+    </div>
+  )
+}
