@@ -19,6 +19,9 @@ import MemoHook from './components/MemoHook';
 import About from './ReactRouter/About';
 import Policy from './ReactRouter/Policy';
 import Term from './ReactRouter/Term';
+import Layout from './ReactRouter/Layout';
+import Post from './ReactRouter/Posts';
+import PostDetail from './ReactRouter/PostDetail';
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
@@ -84,6 +87,7 @@ function App() {
  
   return (
     <div>
+      <h3> React Router </h3>
       <nav>
         <ul>
           <li>
@@ -91,17 +95,26 @@ function App() {
             <NavLink to="/sample-score">Sample Score</NavLink> |
             <Link to="/about">About </Link> |
             <Link to="/term">Term</Link> |
-            <Link to="/policy">Policy</Link>
+            <Link to="/policy">Policy</Link>  |
+            <Link to="/post">Post</Link>
           </li>
         </ul>
       </nav>
-        <Switch>
-          <Route exact path="/" component={About} />
-          <Route exact path="/sample-score" component={SampleScores} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/term" component={Term} />
-          <Route exact path="/policy" component={Policy} />
-        </Switch>
+      <Switch>
+        <Route exact path="/" component={About} />
+        <Route exact path="/sample-score" component={SampleScores} />
+        <Route exact path="/about" render={() => <Layout><About/></Layout>} />
+        <Route 
+          exact 
+          path="/term"
+          children={() => (
+            <Layout><Term /></Layout>
+          )}
+        />
+        <Route exact path="/policy" component={Policy} />
+        <Route exact path="/post/:id" component={PostDetail} />
+        <Route exact path="/post" component={Post} />
+      </Switch>
      
 
 
