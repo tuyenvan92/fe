@@ -143,6 +143,12 @@ function App() {
             <br/>
             <br/>
             <Link to="/custom-hook">custom hook resize window</Link>
+            <br /><br />
+            <Link to="/about">About</Link>
+            <br /><br />
+            <Link to="/term">Term</Link>
+            <br /><br />
+            <Link to="/policy">Policy</Link>
         </ul>
       </nav>
       <Switch>
@@ -168,7 +174,11 @@ function App() {
           <MemoHook title="truong" handleTitleBook={handleTitleBook}  />
         </Route>
         <Route exact path="/custom-hook" component={useResizeWindow}>{isSmallScreen ? <h2>small screen</h2> : <h2> large screen</h2>}</Route>
-        
+        <Route path='/term' component={Term}/>
+        <Route path='/policy' component={Policy}/>
+        <Route path='/about/company' component={Company}/>
+        <Route path='/about/contact' component={Contact}/>
+        <Route path='/about' component={About}/>
       </Switch>
 
 {/* 
@@ -262,23 +272,6 @@ function App() {
         
       {isSmallScreen ? <h2>small screen</h2> : <h2> large screen</h2>} */}
       --------------------------------------------------------------------
-
-      <div>
-        <aside>
-          <Link to="/about">About</Link>
-          <Link to="/term">Term</Link>
-          <Link to="/policy">Policy</Link>
-          {/* <Link to="/company">Company</Link>
-          <Link to="/contact">Contact</Link> */}
-        </aside>
-        <main>
-          <Route path='/about' component={About}/>
-          <Route path='/term' component={Term}/>
-          <Route path='/policy' component={Policy}/>
-        </main>
-      </div>
-
-
     </div>
   )
 }
@@ -293,10 +286,6 @@ function About() {
         <Link to="/about/company">Company</Link>
         <Link to="/about/contact">Contact</Link>
       </aside>
-        <main>
-          <Route path='/about/company' component={Company}/>
-          <Route path='/about/contact' component={Contact}/>
-        </main>
     </div>
   )
 }
