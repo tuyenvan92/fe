@@ -22,6 +22,8 @@ import Term from './ReactRouter/Term';
 import Layout from './ReactRouter/Layout';
 import Post from './ReactRouter/Posts';
 import PostDetail from './ReactRouter/PostDetail';
+import User from './ReactRouter/User';
+import UserDetail from './ReactRouter/UserDetail';
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
@@ -89,14 +91,15 @@ function App() {
     <div>
       <h3> React Router </h3>
       <nav>
-        <ul>
+        <ul className="react-router">
           <li>
             {/* <Link to="/" activeClassName="active">Sample Score</Link> */}
             <NavLink to="/sample-score">Sample Score</NavLink> |
             <Link to="/about">About </Link> |
             <Link to="/term">Term</Link> |
             <Link to="/policy">Policy</Link>  |
-            <Link to="/post">Post</Link>
+            <Link to="/post">Post</Link>  |
+            <Link to="/user">User</Link>
           </li>
         </ul>
       </nav>
@@ -114,6 +117,8 @@ function App() {
         <Route exact path="/policy" component={Policy} />
         <Route exact path="/post/:id" component={PostDetail} />
         <Route exact path="/post" component={Post} />
+        <Route exact path="/user/:id" component={UserDetail} />
+        <Route exact path="/user" component={User} />
       </Switch>
      
 
