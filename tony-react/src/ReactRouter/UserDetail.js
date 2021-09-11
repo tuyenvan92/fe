@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams  } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 export default function UserDetail() {
   const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState({});
   const { id } = useParams();
+
 
   useEffect(() => {
     async function fetchUsers() {
