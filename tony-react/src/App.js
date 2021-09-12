@@ -24,6 +24,8 @@ import Post from './ReactRouter/Posts';
 import PostDetail from './ReactRouter/PostDetail';
 import User from './ReactRouter/User';
 import UserDetail from './ReactRouter/UserDetail';
+import AuthenticateRoute from './AuthenticateRoute/AuthenticateRoute';
+
 
 // Sample App
 import ComposeComponent from './ComposeComponent/ComposeComponent';
@@ -100,6 +102,7 @@ function App() {
             <Link to="/policy">Policy</Link>  |
             <Link to="/post">Post</Link>  |
             <Link to="/user">User</Link>
+            <Link to="/authenticate">Authenticate Route</Link>
           </li>
         </ul>
       </nav>
@@ -119,6 +122,7 @@ function App() {
         <Route exact path="/post" component={Post} />
         <Route exact path="/user/:id" component={UserDetail} />
         <Route exact path="/user" component={User} />
+        <Route path="/authenticate" component={AuthenticateRoute} />
       </Switch>
      
 
