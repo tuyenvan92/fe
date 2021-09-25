@@ -1,9 +1,11 @@
-import './App.css';
-import Dashboard from './components/Dashboard';
-import Login from './components/Login';
-import Register from './components/Register';
 import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 
+import './App.css';
+
+// views
+import Dashboard from "views/Dashboard";
+import Register from "views/Register";
+import Login from "views/Login";
 
 function App() {
   return (

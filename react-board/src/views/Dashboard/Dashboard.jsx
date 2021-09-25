@@ -1,21 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import { Toast, ToastBody, ToastHeader } from 'reactstrap';
 
-const ColoredLine = ({ color }) => (
-    <hr
-        style={{
-            color: color,
-            backgroundColor: color,
-            height: 1
-        }}
-    />
-);
+// components
+import Horizontal from 'components/Horizontal';
 
+let defaultTodos = [];
 
 export default function Dashboard() {
-    const [todos, setTodos] = useState([])
+    const [todos, setTodos] = useState([]);
+    const [isAllowSubmit, setIsAllowSubmit] = useState(false);
     const [forms, setForms] = useState({
         id:'',
         description:'',
@@ -23,12 +17,18 @@ export default function Dashboard() {
     })
     
     function onChange(event) {
-        setForms({
-            ...forms,
-            [event.target.name]:event.target.value
+        const { name, value } = event.target;
+        // setForms({
+        //     ...forms,
+        //     [event.target.name]:event.target.value
+        // })
+        setForms(prevState => {
+            return {
+                ...prevState,
+                [name]: value
+            }
         })
     }
-
     
 
     // fetch Todos
@@ -37,8 +37,8 @@ export default function Dashboard() {
             method:'GET',
         })
         const data = await res.json();  
-        //console.log(data.data)
-        return setTodos(data.data);
+        setTodos(data.data);
+        defaultTodos = data.data;
     }   
 
     useEffect(() => {      
@@ -46,7 +46,13 @@ export default function Dashboard() {
     },[])
     
     // add Todos
-    async function addTodos() {
+    async function addTodos(event) {
+        event.preventDefault();
+        setIsAllowSubmit(true);
+        if(forms.description === '') {
+            console.log('please enter input');
+            return;
+        }
         const newTodos = {
             id: Date.now().toString(),
             description: forms.description,
@@ -55,15 +61,13 @@ export default function Dashboard() {
             title: "Learn React",
             author: "Tony Nguyen"
         }
-        //console.log("newTodooooooos", newTodos)
         const res = await fetch(`https://tony-json-server.herokuapp.com/api/todos`, {
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newTodos)
         })
         const data = await res.json(); 
-        setTodos([...todos, data])
-        fetchTodos(todos);
+        setTodos([...todos, data.data])
     }
 
     // delete Todos
@@ -72,8 +76,10 @@ export default function Dashboard() {
             method:'DELETE',
             headers: { 'Content-Type': 'application/json' }
         })
-        const newSetTodos = todos.filter((item) => item.id !== todoId);
-        fetchTodos(newSetTodos);
+        const newTodos = todos.filter((item) => item.id !== todoId);
+        setTodos(newTodos);
+        defaultTodos = newTodos;
+        // fetchTodos();
     }
 
     
@@ -84,62 +90,53 @@ export default function Dashboard() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({'state': "closed"})
         })
-        fetchTodos(todos);   
+        fetchTodos();   
     }
     
     // filter All - Open - Closed
     function filterOpen() {
-        const setOpen = todos.filter((item) => item.state === "open")
-        console.log("opennnn",setOpen);
-        fetchTodos(setOpen);
+        const newTodos = defaultTodos.filter((item) => item.state === "open")
+        setTodos(newTodos)
     }
     function filterClosed() {
-        const setClosed = todos.filter((item) => item.state === "closed")
-        console.log("closedddddd",setClosed);
-        fetchTodos(setClosed);
+        const newTodos = defaultTodos.filter((item) => item.state === "closed")
+        setTodos(newTodos)
     }
     function filterAll() {
-        console.log("Alllllllll", todos);
-        fetchTodos(todos);
+        setTodos(defaultTodos)
     }
 
     // sort by name
     function sortByName(event) {
-        console.log("Option valueeee", event)
-        const newTodos = todos.sort(function (a,b) {
+        const newTodos = [...todos];
+        newTodos.sort((a,b) => {
             const nameA = a.description.toLowerCase();
             const nameB = b.description.toLowerCase();
-            if (event === 'ASC' && nameA < nameB) {
-                return -1;
-            } if (event === 'DESC' && nameA > nameB) {
-                return -1;
-            } else {
-                return 0;
-            }
+            if (event === 'ASC' && nameA < nameB) return -1;
+            if (event === 'DESC' && nameA > nameB) return -1;
+            return 0;
         })
-        console.log('newTodos in sort by name', newTodos)
-        fetchTodos(newTodos)
+        setTodos(newTodos)
     }
 
     // search by description
     function searchByDes(event) {
-        console.log('search by description', event)
-        const newTodos = todos.filter((data) => {
-            return data.description.search(event) !== -1
-        })
-        console.log('newTodos in search by description', newTodos)
-        fetchTodos(newTodos)
+        // console.log('search by description', event)
+        const newTodos = defaultTodos.filter(todo => todo.description.toLowerCase().indexOf(event) !== -1)
+        // const newTodos = todos.filter((data) => {
+        //     return data.description.search(event) !== -1
+        // })
+        setTodos(newTodos)
     }
-
-
 
     return (
         <div>
             <div className="header">Todo Tracker</div>
-            <Form>
+            <Form onSubmit={addTodos}>
                 <FormGroup>
                     <Label for="description">Decription</Label>
                     <Input type="text" name="description" value={forms.description} id="description" placeholder="Describe the issue..." onChange={onChange}/>
+                    {isAllowSubmit && forms.description === '' && <div className="text-danger">Please enter description...</div>}
                 </FormGroup>
                 <br/>
                 <FormGroup>
@@ -151,32 +148,32 @@ export default function Dashboard() {
                     </Input>
                 </FormGroup>
                 <br/>
-                <Button type="button" color="primary" onClick={addTodos}>Add</Button>
+                <Button type="submit" color="primary">Add</Button>
             </Form>
 
-            <ColoredLine color="gray"/>
+            <Horizontal color="gray"/>
 
             <h2>LIST TODO</h2>
-                    <Input type="text" className="search" placeholder="Search by description" onChange={(event) => searchByDes(event.target.value)}/>
-                    <div className="filter flex j-between">
-                        <h5>Filter</h5> 
-                        <Button type="button" color="success" onClick={() => filterAll()}>All</Button>
-                        <Button type="button" color="info" onClick={() => filterOpen()}>Open</Button>
-                        <Button type="button" color="secondary" onClick={() => filterClosed()}>Closed</Button>
-                    </div>
-                    <div className="sort flex j-between">
-                        <h5>Sort</h5>
-                        <Input type="select" className="sort-select" onChange={(event) => sortByName(event.target.value)} >
-                            <option value="none">None</option>
-                            <option value="ASC">ASC</option>
-                            <option value="DESC">DESC</option>
-                        </Input>
-                    </div>
+            <Input type="text" className="search" placeholder="Search by description" onChange={(event) => searchByDes(event.target.value)}/>
+            <div className="filter flex j-between">
+                <h5>Filter</h5> 
+                <Button type="button" color="success" onClick={() => filterAll()}>All</Button>
+                <Button type="button" color="info" onClick={() => filterOpen()}>Open</Button>
+                <Button type="button" color="secondary" onClick={() => filterClosed()}>Closed</Button>
+            </div>
+            <div className="sort flex j-between">
+                <h5>Sort</h5>
+                <Input type="select" className="sort-select" onChange={(event) => sortByName(event.target.value)} >
+                    <option value="none">None</option>
+                    <option value="ASC">ASC</option>
+                    <option value="DESC">DESC</option>
+                </Input>
+            </div>
 
-            <ColoredLine color="gray"/>
+            <Horizontal />
 
-            {todos.map((todo) => (
-                <div>
+            <div className="dashboard_wrapper">
+                {todos.map((todo) => (
                     <div className="p-3 my-2 rounded bg-docs-transparent-grid">
                         <Toast>
                             <ToastHeader key={todo.id}>{todo.id}<span className="issue-status" value={todo}>{todo.state}</span></ToastHeader>
@@ -190,8 +187,8 @@ export default function Dashboard() {
                                 </ToastBody>
                         </Toast>
                     </div>
-                </div>
-            ))}  
+                ))}  
+            </div>
         </div>
     )
 }
