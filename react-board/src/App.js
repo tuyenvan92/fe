@@ -12,14 +12,14 @@ function App() {
     <div className="App">
       <Router>
         <ul>
-          <li><Link to="/Register">Register</Link></li>
-          <li><Link to="/Login">Login</Link></li>
-          <li><Link to="/Dashboard">Dashboard</Link></li>
+          <li><Link to="/register">Register</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/dashboard">Dashboard</Link></li>
         </ul>
         <Switch>
-          <Route exact path="/Register" component={Register}/>
-          <Route exact path="/Login" component={Login}/>
-          <Route exact path="/Dashboard" component={Dashboard}/>
+          <Route exact path="/register" component={Register}/>
+          <Route exact path="/login" component={Login}/>
+          <Route exact path="/dashboard" component={Dashboard}/>
       </Switch>
       </Router>
     </div>
