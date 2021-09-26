@@ -1,27 +1,27 @@
-import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
 
 import './App.css';
 
 // views
 import Dashboard from "views/Dashboard";
-import Register from "views/Register";
-import Login from "views/Login";
+import Account from "views/Account/Account";
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <ul>
-          <li><Link to="/register">Register</Link></li>
-          <li><Link to="/login">Login</Link></li>
-          <li><Link to="/dashboard">Dashboard</Link></li>
-        </ul>
+      <header> 
+        <Link to="/account">Account</Link> |
+        <Link to="/dasboard">Dashboard</Link>
+      </header>
+      <main>
         <Switch>
-          <Route exact path="/register" component={Register}/>
-          <Route exact path="/login" component={Login}/>
-          <Route exact path="/dashboard" component={Dashboard}/>
-      </Switch>
-      </Router>
+          <Route path="/account" component={Account} />
+          <Route path="/" component={Dashboard} />
+        </Switch>
+      </main>
+      <footer>
+        this is footer
+      </footer>
     </div>
   );
 }
