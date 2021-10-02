@@ -10,6 +10,7 @@ import Login from "views/Login";
 function App() {
   return (
     <div className="App">
+      <h1>Homepage</h1>
       <Router>
         <ul>
           <li><Link to="/register">Register</Link></li>

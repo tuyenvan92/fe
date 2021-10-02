@@ -6,7 +6,7 @@ export default function GuestGuard({isAuth, component: Component, ...rest}) {
       <Route
         {...rest}
         render = {props => {
-          return isAuth ? <Redirect to ="/dashboard"/> : <Component {props}>
+          return isAuth ? <Redirect to ="/dashboard"/> : <Component {...props} />
         }}
       />
     )

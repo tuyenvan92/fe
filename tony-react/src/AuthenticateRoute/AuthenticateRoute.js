@@ -46,6 +46,7 @@ function AuthenticateRoute() {
       <br /><br />
       --------------------------
       <h3>Page</h3>
+      
       <GuestRoute exact path="/authenticate/login" isAuth={isAuth} component={Login} />
       <AuthRoute exact path="/authenticate/user" isAuth={isAuth} component={User} />
       
