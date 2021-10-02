@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, FormGroup, Input } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import { useHistory  } from 'react-router-dom';
 
 export default function Login() {
+    const history = useHistory();
     const [users, setUsers] = useState([]);
     const [forms, setForms] = useState({
         email:'',
@@ -50,11 +52,11 @@ export default function Login() {
 
     }
 
-
     const handleAuth = (e) => {
         e.preventDefault();
         const { email } = forms;
-        const user = users.some(item => item.email === email);
+        const user = users.find(item => item.email === email);
+        const userId = user?.id
         
         if(!user) {
             notifyError();
@@ -63,9 +65,11 @@ export default function Login() {
 
         notifySuccess();
         // set auth
+        window.sessionStorage.setItem('user', userId)
         // something
+        history.push('/')
     }
-    
+
     return(
         <div className="register-page">
             <h2>MEMBER LOGIN</h2>

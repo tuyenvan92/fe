@@ -13,13 +13,17 @@ import App from './App';
 import Register from "views/Register";
 import Login from "views/Login";
 
+// guards
+import AuthGuard from 'guards/AuthGuard';
+import GuestGuard from 'guards/GuestGuard';
+
 
 ReactDOM.render(
     <Router>
       <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        <Route path="/" component={App} />
+        <GuestGuard path="/login" component={Login} />
+        <GuestGuard path="/register" component={Register} />
+        <AuthGuard path="/" component={App} />
       </Switch>
     </Router>
   ,
