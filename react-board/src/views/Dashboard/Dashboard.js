@@ -8,6 +8,8 @@ import Horizontal from 'components/Horizontal';
 let defaultTodos = [];
 
 export default function Dashboard() {
+
+    console.log('dsads')
     const [todos, setTodos] = useState([]);
     const [isAllowSubmit, setIsAllowSubmit] = useState(false);
     const [forms, setForms] = useState({
