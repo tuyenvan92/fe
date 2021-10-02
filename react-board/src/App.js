@@ -1,15 +1,15 @@
-import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
 
 import './App.css';
 
 // views
 import Dashboard from "views/Dashboard";
-import Register from "views/Register";
-import Login from "views/Login";
+import Account from "views/Account/Account";
 
 function App() {
   return (
     <div className="App">
+<<<<<<< HEAD
       <h1>Homepage</h1>
       <Router>
         <ul>
@@ -17,12 +17,21 @@ function App() {
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/dashboard">Dashboard</Link></li>
         </ul>
+=======
+      <header> 
+        <Link to="/account">Account</Link> |
+        <Link to="/dasboard">Dashboard</Link>
+      </header>
+      <main>
+>>>>>>> 79b47a42f340b4819f2040ba402ab3f5d63075c0
         <Switch>
-          <Route exact path="/register" component={Register}/>
-          <Route exact path="/login" component={Login}/>
-          <Route exact path="/dashboard" component={Dashboard}/>
-      </Switch>
-      </Router>
+          <Route path="/account" component={Account} />
+          <Route path="/" component={Dashboard} />
+        </Switch>
+      </main>
+      <footer>
+        this is footer
+      </footer>
     </div>
   );
 }
