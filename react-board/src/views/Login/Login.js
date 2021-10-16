@@ -3,6 +3,12 @@ import { Button, Form, FormGroup, Input } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import { useHistory  } from 'react-router-dom';
 
+// services
+import authService from 'services/authServices';
+
+// context
+import { useStateApp } from 'context/AppContext';
+
 export default function Login() {
     const history = useHistory();
     const [users, setUsers] = useState([]);
@@ -29,6 +35,7 @@ export default function Login() {
         draggable: true,
         progress: undefined,
     });
+    const { handleSetUser } = useStateApp();
 
     // fetch users
     useEffect(() => {
@@ -57,6 +64,7 @@ export default function Login() {
  
 
     const handleAuth = (e) => {
+
         e.preventDefault();
         const { email } = forms;
         const user = users.find(item => item.email === email);
@@ -69,9 +77,10 @@ export default function Login() {
 
         notifySuccess();
         // set auth
-        window.sessionStorage.setItem('user', userId)
+        handleSetUser(userId)
+
         // something
-        history.push('/')
+        // history.push('/')
     }
 
     return(

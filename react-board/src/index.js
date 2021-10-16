@@ -17,17 +17,19 @@ import Login from "views/Login";
 import AuthGuard from 'guards/AuthGuard';
 import GuestGuard from 'guards/GuestGuard';
 
+// context
+import { AppProvider } from 'context/AppContext';
 
 ReactDOM.render(
-    <Router>
+  <Router>
+    <AppProvider>
       <Switch>
         <GuestGuard path="/login" component={Login} />
         <GuestGuard path="/register" component={Register} />
         <AuthGuard path="/" component={App} />
       </Switch>
-    </Router>
-
-  ,
+    </AppProvider>
+  </Router>,
   document.getElementById('root')
 );
 
