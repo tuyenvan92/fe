@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import React, {useState, useEffect,createContext} from 'react'
-import { Button, Form, FormGroup, Input } from 'reactstrap';
-//import AuthGuard from 'guards/AuthGuard';
-import {Link,Route} from 'react-router-dom';
-import Dashboard from 'views/Dashboard/Dashboard';
-import AuthGuard from 'guards/AuthGuard';
-import GuestGuard from 'guards/GuestGuard';
-//import AuthContext from '../../guards/authContext'
-
-export const StoreContext = createContext(null)
-export default function Login({props}) {
-    const [isAuth, setIsAuth] = useState(false);
-=======
 import React, { useState, useEffect } from 'react'
 import { Button, Form, FormGroup, Input } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
@@ -20,7 +6,6 @@ import { useHistory  } from 'react-router-dom';
 export default function Login() {
     const history = useHistory();
     const [users, setUsers] = useState([]);
->>>>>>> 277726a39af83f4f1f17441c4cd075c5b4de0ebb
     const [forms, setForms] = useState({
         email:'',
         password:''
@@ -71,28 +56,6 @@ export default function Login() {
     console.log('STOREEE',store)
  
 
-<<<<<<< HEAD
-    async function handleAuth(email,password) {
-        const res = await fetch(`https://tony-json-server.herokuapp.com/api/users`, 
-            {email,
-            password,
-            method: 'GET'
-        })
-        const data = await res.json();
-        if(data === isAuth) {
-            setIsAuth(true)
-            return
-        }
-        setIsAuth(false)
-    }
-
-    useEffect(() => {
-        handleAuth();
-    })
-    
-   
-    
-=======
     const handleAuth = (e) => {
         e.preventDefault();
         const { email } = forms;
@@ -111,10 +74,8 @@ export default function Login() {
         history.push('/')
     }
 
->>>>>>> 277726a39af83f4f1f17441c4cd075c5b4de0ebb
     return(
-        <div>
-          <div className="register-page">
+        <div className="register-page">
             <h2>MEMBER LOGIN</h2>
             <br/>
             <Form onSubmit={handleAuth}>
@@ -130,21 +91,7 @@ export default function Login() {
                 <br/>
                 <Button type="submit" color="success">Login</Button>
             </Form>
-<<<<<<< HEAD
-            <br/>
-            <br/>
-
-            <GuestGuard exact path="/authenticate/login" isAuth={isAuth} component={Login} />
-            <AuthGuard exact path="/authenticate/user" isAuth={isAuth} component={Dashboard} />
-          </div>
-
-          <StoreContext.Provider value={store}>{props}</StoreContext.Provider>
-
-          <Link to ="/dashboard">Dashboard</Link>
-          <Route exact path ="/login/dashboard" component={Dashboard}></Route>
-=======
             <ToastContainer />
->>>>>>> 277726a39af83f4f1f17441c4cd075c5b4de0ebb
         </div>
         
     )
