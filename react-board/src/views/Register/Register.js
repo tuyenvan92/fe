@@ -1,7 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Button, Form, FormGroup, Input } from 'reactstrap';
+import {Link, Route} from 'react-router-dom'
 
 export default function Register() {
+  const [todos, setTodos] = useState([]);
     const [forms, setForms] = useState({
         firstName:'',
         lastName:'',
@@ -22,7 +24,21 @@ export default function Register() {
             [name] : value
         })
     }
-    function handleSubmit() {
+
+    // fetchTodos
+    const fetchTodos =  async () => {
+      const res = await fetch(`https://tony-json-server.herokuapp.com/api/users`, {
+          method:'GET',
+      })
+      const data = await res.json();  
+      setTodos(data.data);
+  }   
+
+    useEffect(() => {      
+      fetchTodos();
+    },[])
+
+    async function handleSubmit() {
       if (forms.firstName === '') {
         setIsErrorFirstName(true);
       }
@@ -39,19 +55,23 @@ export default function Register() {
         setIsErrorPasswordConfirm(true)
       }
       const newUser = {
-        firstName:'',
-        lastName:'',
-        email:'',
-        password:'',
-        passwordConfirm:''
+        id: Date.now().toString(),
+        firstName:forms.firstName,
+        lastName:forms.lastName,
+        email:forms.email,
+        password:forms.password,
+        passwordConfirm:forms.passwordConfirm
       }
-      fetch(`https://tony-json-server.herokuapp.com/api/users`, {
+      const res = await fetch(`https://tony-json-server.herokuapp.com/api/users`, {
         method:'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(newUser)
       })
+      const data = await res.json();
+      setTodos([...todos, data.data])
+
     }
 
     return(
@@ -91,6 +111,9 @@ export default function Register() {
                 <br/>
                 <Button type="button" color="success" onClick={handleSubmit}>Register</Button>
             </Form>
+            <br/>
+            <Link to="/login">Already have an account? Log in</Link>
+            <Route exact path ="/login"></Route>
         </div>
     )
 }

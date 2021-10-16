@@ -6,11 +6,13 @@ import reportWebVitals from './reportWebVitals';
 // styles
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './App';
+import StoreProvider from 'views/Login/Login';
 
 // views
-import App from './App';
 import Register from "views/Register";
 import Login from "views/Login";
+import Dashboard from "views/Dashboard"
 
 
 ReactDOM.render(
@@ -19,8 +21,12 @@ ReactDOM.render(
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/" component={App} />
+        <StoreProvider>
+          <Route path="/login/dashboard" component={Dashboard} />
+        </StoreProvider>
       </Switch>
     </Router>
+
   ,
   document.getElementById('root')
 );

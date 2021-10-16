@@ -1,13 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import { Toast, ToastBody, ToastHeader } from 'reactstrap';
+import { StoreContext } from 'views/Login/Login';
 
 // components
 import Horizontal from 'components/Horizontal';
 
 let defaultTodos = [];
 
-export default function Dashboard() {
+export default function Dashboard(type) {
+    const {email} = useContext(StoreContext)
+    console.log(email)
+    
+
+    
+    
+    
     const [todos, setTodos] = useState([]);
     const [isAllowSubmit, setIsAllowSubmit] = useState(false);
     const [forms, setForms] = useState({
