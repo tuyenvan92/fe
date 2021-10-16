@@ -1,24 +1,32 @@
 import { useState } from 'react';
+import store from './stores';
+
+// actions
+import { setIncrement, setDescrement } from './actions/counterActions';
 
 function App() {
   // State
-  const [counter, setCounter] = useState(0);
+  const [number , setNumber] = useState(store.getState().counter.number);
 
   // Actions
   function handleIncrement() {
-    setCounter(prevState => prevState + 1)
+    store.dispatch(setIncrement(1))
   }
 
   function handleDecrement() {
-    setCounter(prevState => prevState - 1)
+    store.dispatch(setDescrement(1))
   }
+
+  store.subscribe(() => {
+    setNumber(store.getState().counter.number)
+  })
 
   // Views
   return (
     <div>
       <h2>React Redux</h2>
       <div>
-        Counter: {counter} <br />
+        Counter: {number} <br />
         <button type="button" onClick={handleDecrement}>decrement</button>
         <button type="button" onClick={handleIncrement}>increment</button>
       </div>
