@@ -1,25 +1,40 @@
-import { useState } from 'react';
-import store from './stores';
+import { connect } from 'react-redux';
+// import store from './stores';
 
 // actions
 import { setIncrement, setDescrement } from './actions/counterActions';
 
-function App() {
+const mapStateToProps = (state, ownProps) => {
+  const number = state.counter.number + ownProps.randomNumber; // 0 + 3
+  return {
+    number
+  }
+}
+
+const mapDispatchToProps = {
+  setIncrement,
+  setDescrement
+}
+
+function App({ number, setIncrement, setDescrement }) {
   // State
-  const [number , setNumber] = useState(store.getState().counter.number);
+  // store.subscribe(() => {
+  //   setNumber(store.getState().counter.number)
+  // })
 
   // Actions
   function handleIncrement() {
-    store.dispatch(setIncrement(1))
+    // store.dispatch(setIncrement(1))
+    setIncrement(1);
   }
 
   function handleDecrement() {
-    store.dispatch(setDescrement(1))
+    // store.dispatch(setDescrement(1))
+    setDescrement(1)
   }
 
-  store.subscribe(() => {
-    setNumber(store.getState().counter.number)
-  })
+  console.log('render app')
+
 
   // Views
   return (
@@ -34,4 +49,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

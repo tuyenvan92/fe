@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 
 import './index.css';
 import App from './App';
+import CounterHook from './CounterHook';
 import reportWebVitals from './reportWebVitals';
 
 // stores
@@ -11,7 +12,8 @@ import store from './stores';
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App randomNumber={3} isAuth={false} />
+    <CounterHook />
   </Provider>,
   document.getElementById('root')
 );
