@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Form, FormGroup, Input } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
-import { useHistory  } from 'react-router-dom';
+//import { useHistory  } from 'react-router-dom';
 
 // services
-import authService from 'services/authServices';
+//import authService from 'services/authServices';
 
 // context
 import { useStateApp } from 'context/AppContext';
 
 export default function Login() {
-    const history = useHistory();
+    //const history = useHistory();
     const [users, setUsers] = useState([]);
     const [forms, setForms] = useState({
         email:'',
         password:''
     });
+
     const notifyError = () => toast.error(`User isn't existed`, {
         position: "top-right",
         autoClose: 5000,

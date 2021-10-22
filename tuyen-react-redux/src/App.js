@@ -5,10 +5,17 @@ import store from './stores'
 
 //actions
 import {setIncrement, setDecrement} from './actions/counterActions'
+const mapStateToProps = state => {
+  console.log(state)
+  const number = state.counter.number;
+  return {
+    number
+  }
+}
 
 function App() {
   // State
-  const [number, setNumber] = useState{store.getState().counter.number};
+  //const [number, setNumber] = useState{store.getState().counter.number};
 
 
   // Actions
@@ -19,11 +26,8 @@ function App() {
     store.dispatch(setDecrement(1))
   }
 
-  store.subscribe(( => {
-    setNumber(store.getState().counter.number)
-  }))
 
-  console.log('store', store.getState())
+  //console.log('store', store.getState())
 
 
 
@@ -40,4 +44,5 @@ function App() {
   );
 }
 
-export default App;
+export default connect(mapStateToProps)(App);
+
