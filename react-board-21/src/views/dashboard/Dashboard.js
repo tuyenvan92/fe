@@ -1,5 +1,8 @@
 import React, {useState,useEffect} from 'react'
-import Select from 'react-select'
+import Select from 'react-select';
+
+// apis
+import * as todoApi from '../../apis/todoApi';
 
 export default function Dashboard() {
     // Severity select
@@ -42,13 +45,11 @@ export default function Dashboard() {
     }
     //fetch Todos
     const fetchTodos = async () => {
-        const res = await fetch(`https://tony-json-server.herokuapp.com/api/todos`, {
-            method:'GET'
-        })
-        const data = await res.json()
+        const data = await todoApi.fetchTodos();
         setTodos(data.data)
         //defaultTodos = data.data
     }
+
     useEffect(() => {
         fetchTodos()
     },[])
@@ -63,11 +64,11 @@ export default function Dashboard() {
                 <div className="dashboard-left">
                     <form className="form-dashboard">
                         <div className="input-group">
-                            <label for="description">Description</label>
+                            <label htmlFor="description">Description</label>
                             <input autoComplete="off" type="text" placeholder="Describe the issue"/>
                         </div>
                         <div className="input-group">
-                            <label for="severity">Severity</label>
+                            <label htmlFor="severity">Severity</label>
                             <Select options={options} 
                                     styles={customStyles}
                             />
@@ -98,20 +99,20 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-                    <div class="task-wrapper">
-                        {todos.map((todo) => (
-                            <div className="todo-task">
-                            <div> 
-                                <span className="issue-status">{todo.status}</span> 
-                                <span className="issue-id">{todo.id}</span>
+                    <div className="task-wrapper">
+                        {todos.map((todo, todoIndex) => (
+                            <div key={todoIndex} className="todo-task">
+                                <div> 
+                                    <span className="issue-status">{todo.status}</span> 
+                                    <span className="issue-id">{todo.id}</span>
+                                </div>
+                                <div className="hr"></div>
+                                <div className="issue-name">{todo.description}</div>
+                                <div className="button-group">
+                                    <button className="button-close">Close</button>
+                                    <button className="button-delete">Delete</button>
+                                </div>
                             </div>
-                            <div className="hr"></div>
-                            <div className="issue-name">{todo.description}</div>
-                            <div className="button-group">
-                                <button className="button-close">Close</button>
-                                <button className="button-delete">Delete</button>
-                            </div>
-                        </div>
                         ))}      
                     </div>
                     
