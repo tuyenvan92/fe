@@ -1,6 +1,24 @@
-import React from 'react'
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+
+// apis
+import * as userApi from 'apis/userApi';
 
 function Login() {
+  const history = useHistory();
+
+  async function onSubmit(event) {
+    event.preventDefault();
+    try {
+      const res = await userApi.loginUser('admin@gmail.com', '123456');
+      const token = res.data.token;
+      window.sessionStorage.setItem('accessToken', token);
+      history.push('/')
+    } catch (error) {
+      console.log('error: ', error.response)
+    }
+  }
+
 
   return (
     <div class="login-form">
@@ -10,7 +28,7 @@ function Login() {
             <div class="card">
               <div class="card-header">Login</div>
               <div class="card-body">
-                <form>
+                <form onSubmit={onSubmit}>
                     <div class="form-group row">
                         <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
                         <div class="col-md-6">

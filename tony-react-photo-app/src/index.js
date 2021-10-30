@@ -1,21 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import reportWebVitals from './reportWebVitals';
 
 // styles
 import './index.css';
 
+// store
+import store from 'stores';
+
 // views
 import App from './App';
 import Login from 'views/Login';
 
 ReactDOM.render(
-  <Router>
-    <Route path="/login" component={Login} />
-    <Route path="/" component={App} />
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <Route path="/login" component={Login} />
+      <Route path="/" component={App} />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 
