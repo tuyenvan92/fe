@@ -4,18 +4,25 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import reportWebVitals from './reportWebVitals';
 
+import {Provider} from 'react-redux'
+
 // styles
 import './index.scss';
+
+//store
+import store from 'stores'
 
 // views
 import App from './App';
 import Login from 'views/Login';
 
 ReactDOM.render(
-  <Router>
-    <Route path="/login" component={Login} />
-    <Route path="/" component={App} />
-  </Router>,
+  <Provider store={store}>
+    <Router>
+      <Route path="/login" component={Login} />
+      <Route path="/" component={App} />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

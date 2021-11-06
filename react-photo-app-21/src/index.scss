@@ -12,13 +12,18 @@ textarea:focus, input:focus{
 *:focus {
   outline: none;
 }
-
 * {
   color:#333;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+button {
+  cursor: pointer;
+}
+Link{
+    text-decoration: none;
 }
 .icons {
   width: 20px;

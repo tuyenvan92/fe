@@ -1,72 +1,44 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import { Switch, Route, Link } from "react-router-dom";
+import PhotoDetail from "views/PhotoDetail";
+
+import * as photosApi from '../../apis/photoApi'
 
 function Dashboard() {
+  const [photos, setPhotos] = useState([])
 
+  //fetch Todos
+  const fetchPhotos = async () => {
+    const data = await photosApi.fetchPhotos();
+    setPhotos(data.data)
+  }
+
+  useEffect(() => {
+    fetchPhotos()
+  },[])
 
   return (
     <div>
         <div className="photo-album">
           <div className="album">
             <div className="container">
-              {/* <div className="navbar">
-                <div className="logo">Album</div>
-                <div className="menu j-between">
-                  <span className="menu-title">Blog</span>
-                  <span className="menu-title">About</span>
-                  <span className="menu-title">Contact</span>
-                </div>
-                <div className="icon-group j-between">
-                  <img class="icons" src={require('../../img/youtube-brands.svg').default} alt=""/>
-                  <img class="icons" src={require('../../img/facebook-brands.svg').default} alt=""/>
-                  <img class="icons" src={require('../../img/twitter-brands.svg').default} alt=""/>
-                </div> 
-              </div>  */}
-
               <div className="photos-list">
                 <div className="grid-container">
-                  <div className="card grid-item">
-                    <img src="https://placeimg.com/640/480/arch" alt="img" />
-                    <div className="photo-date">10/26/2021</div>
-                    <div className="photo-title">Blog Post</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <div className="read-more red">Read More</div>
-                  </div>
-                  <div className="card grid-item">
-                    <img src="https://placeimg.com/640/480/nature" alt="img" />
-                    <div className="photo-date">10/26/2021</div>
-                    <div className="photo-title">Blog Post 1</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <div className="read-more red">Read More</div>
-                  </div>
-                  <div className="card grid-item">
-                    <img src="https://placeimg.com/640/480/tech" alt="img" />
-                    <div className="photo-date">10/26/2021</div>
-                    <div className="photo-title">Blog Post 2</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <div className="read-more red">Read More</div>
-                  </div>
-                  <div className="card grid-item">
-                    <img src="https://placeimg.com/640/480/tech" alt="img" />
-                    <div className="photo-date">10/26/2021</div>
-                    <div className="photo-title">Blog Post 3</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <div className="read-more red">Read More</div>
-                  </div>
-                  <div className="card grid-item">
-                    <img src="https://placeimg.com/640/480/arch" alt="img" />
-                    <div className="photo-date">10/26/2021</div>
-                    <div className="photo-title">Blog Post 4</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <div className="read-more red">Read More</div>
-                  </div>
-                  <div className="card grid-item">
-                    <img src="https://placeimg.com/640/480/nature" alt="img" />
-                    <div className="photo-date">10/26/2021</div>
-                    <div className="photo-title">Blog Post 5</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <div className="read-more red">Read More</div>
-                  </div>
 
+                {photos.map((photo, photoIndex) => (
+                  <div className="card grid-item" key={photos.id}>
+                    <Link to={{pathname: "/photo/:id", 
+                          state: photos.id}} 
+                          style={{ textDecoration:'none'}}>
+                            <img alt="img" src={photo.image}/>
+                    </Link> 
+                    
+                    <div className="photo-date">{photo.date}</div>
+                    <div className="photo-title">{photo.title}</div>
+                    <p>{photo.description}</p>
+                    <div className="read-more red">Read More</div>
+                  </div>
+                ))}
                 </div>
               </div>
             </div>
@@ -80,6 +52,9 @@ function Dashboard() {
                   <button>Sign Up</button>
                 </div>
           </div>
+          <Switch>
+          <Route path="/photo/:id" component={PhotoDetail} />
+          </Switch>
 
           <div className="footer a-center">
             <div className="container">

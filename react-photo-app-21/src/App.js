@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 
 // views
 import Dashboard from "views/Dashboard";
@@ -10,11 +10,11 @@ function App() {
     <div>
       <div className="navbar">
         <div className="container">
-          <div className="logo" href={Dashboard}>Album</div>
+          <Link to="/" style={{ textDecoration:'none'}}><div className="logo" href={Dashboard}>Album</div></Link> 
             <div className="menu j-between">
-              <span className="menu-title">Blog</span>
-              <span className="menu-title">Add</span>
-              <span className="menu-title">About</span>
+              <Link to="/" style={{ textDecoration:'none'}}><span className="menu-title">Blog</span></Link> 
+              <Link to="/add" style={{ textDecoration:'none'}}><span className="menu-title">Add</span></Link>   
+              <Link to="/login" style={{ textDecoration:'none'}}><span className="menu-title" >Login</span></Link>         
             </div>
             <div className="icon-group j-between">
               <img class="icons" src={require('../src/img/youtube-brands.svg').default} alt=""/>
@@ -24,7 +24,7 @@ function App() {
         </div> 
       </div>
       <Switch>
-        <Route path="/photoadd" component={PhotoAdd} />
+        <Route path="/add" component={PhotoAdd} />
         <Route path="/photo/:id" component={PhotoDetail} />
         <Route path="/" component={Dashboard} />
       </Switch>
