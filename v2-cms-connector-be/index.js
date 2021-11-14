@@ -8,12 +8,26 @@ const userRoute = require('./routes/userRoute')
 dotenv.config()
 app.use(cors());
 
-mongoose.connect( 
-    'mongodb+srv://tuyen123:tuyen123@cluster0.ulyyi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-    () => {
-        console.log('connect to DB')
-    }
-)
+// mongoose.connect( 
+//     'mongodb+srv://nhattruongniit:truong123@cluster0.xga7w.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+//     { 
+//         useNewUrlParser: true, 
+//         useUnifiedTopology: true,
+//         useFindAndModify: false
+//       },
+//     () => {
+//         console.log('connect to DB')
+//     }
+// )
+mongoose.connect(`mongodb+srv://tuyenvan:tuyen123@cluster0.gtqk2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
+        useNewUrlParser: true, 
+        useUnifiedTopology: true
+}).then(() => {
+    console.log('MongoDB connected!!');
+}).catch(err => {
+    console.log('Failed to connect to MongoDB', err);
+});
+
 const PORT = process.env.PORT || 3005
 
 app.use(express.json({ extend:true}));
