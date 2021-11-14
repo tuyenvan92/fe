@@ -1,9 +1,11 @@
 import { Switch, Route, Link } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 // views
 import Dashboard from "views/Dashboard";
 import PhotoAdd from "views/PhotoAdd";
 import PhotoDetail from "views/PhotoDetail";
+import Login from "views/Login";
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
         <Route path="/add" component={PhotoAdd} />
         <Route path="/photo/:id" component={PhotoDetail} />
         <Route path="/" component={Dashboard} />
+        <Route path="/login" component={Login} />
       </Switch>
     </div>
   );

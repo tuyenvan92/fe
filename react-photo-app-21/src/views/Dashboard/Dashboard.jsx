@@ -5,6 +5,24 @@ import PhotoDetail from "views/PhotoDetail";
 import * as photosApi from '../../apis/photoApi'
 
 function Dashboard() {
+  // useEffect(() => {  
+  //   async function fetchUsers() { 
+  //     try {
+  //       const res = await fetch('https://cms-connector-be.herokuapp.com/api/user', {
+  //       method: 'GET'
+  //       })
+  //       const data=await res.json();
+  //       console.log('fetch users:', data)
+  //     } catch (err) {
+        
+  //     }
+      
+  //   }
+
+
+  //   fetchUsers()
+  // },[])
+
   const [photos, setPhotos] = useState([])
 
   //fetch Todos
@@ -30,7 +48,7 @@ function Dashboard() {
                     <Link to={{pathname: "/photo/:id", 
                           state: photos.id}} 
                           style={{ textDecoration:'none'}}>
-                            <img alt="img" src={photo.image}/>
+                            <img alt="img" src={photo.image} class="photo" />
                     </Link> 
                     
                     <div className="photo-date">{photo.date}</div>

@@ -82,20 +82,28 @@ Link{
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;
-  grid-template-rows: auto;
+  grid-template-rows: auto auto auto;
   grid-column-gap: 20px;
-  grid-row-gap: 20px; 
+  grid-row-gap: 30px; 
 }
 .card {
-  width: 100%;
+  // padding: 30px;
+  .photo {
+    width: 100%;
+  }
   letter-spacing: 0.2px;
   img:hover {
     filter: contrast(175%) brightness(50%);
     cursor: pointer;
   }
   border:none;
+  border: solid 1px rgb(248,223,219);
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
   text-align: center;
   margin-bottom: 50px;
+  padding:10px 10px 30px 10px;
+  border-radius: 5px;
   .photo-date {
     margin:20px 0 10px 0;
     font-size: 15px;

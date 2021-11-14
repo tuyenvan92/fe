@@ -8,6 +8,8 @@ import { useCallback } from 'react';
 function PhotoDetail() {
   const [data, setData] = useState(null);
   const { id } = useParams();
+  
+  console.log('iddddd',id)
 
   const fetchPhoto = useCallback(async () => {
     const res = await photoApi.fetchSinglePhoto(id);
