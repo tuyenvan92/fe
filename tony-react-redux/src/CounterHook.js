@@ -15,7 +15,7 @@ function CounterHook() {
 
   return (
     <div>
-      <h3>Sample with useSelector & useDispatch</h3>
+      <h2>Sample with useSelector & useDispatch</h2>
       <div>Number is : {number}</div><br />
       <button type="button" onClick={() => dispatch(setDescrement(2))}>decrement</button>
       <button type="button" onClick={() => dispatch(setIncrement(5))}>increment</button>
