@@ -13,6 +13,7 @@ import store from './stores';
 ReactDOM.render(
   <Provider store={store}>
     <App randomNumber={3} isAuth={false} />
+    ------------------------- <br />
     <CounterHook />
   </Provider>,
   document.getElementById('root')
