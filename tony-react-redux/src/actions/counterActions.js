@@ -13,4 +13,4 @@ export function setIncrement(data) {
 export const setDescrement = data => ({
   type: SET_DECREMENT,
   payload: data
-})
+}) 

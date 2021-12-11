@@ -12,4 +12,4 @@ const store = createStore(rootReducers, composeWithDevTools(
   applyMiddleware()
 ));
 
-export default store;
+export default store; 

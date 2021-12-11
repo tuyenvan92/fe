@@ -1,0 +1,173 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap");
+* {
+  color: #333;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+html, body {
+  font-family: 'Cairo', sans-serif;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+textarea:focus, input:focus {
+  outline: none;
+  color: white;
+}
+
+.j-between {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.a-center {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+button {
+  border: none;
+  font-family: 'Cairo', sans-serif;
+  background: #2ebaef;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: white;
+  color: gray;
+  -webkit-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.App {
+  background-color: #d7e5f0;
+  height: 100vh;
+}
+
+.mainContent {
+  margin: 0 auto;
+  width: 400px;
+  height: auto;
+  background: white;
+}
+
+.mainContent .banner {
+  background: url(../assets/1533749767196.jfif) no-repeat bottom center/cover;
+  width: 100%;
+  height: 250px;
+  position: relative;
+}
+
+.mainContent .banner .bg-blur {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(70, 83, 158, 0.3);
+  z-index: 10;
+}
+
+.mainContent .banner h1 {
+  position: relative;
+  z-index: 11;
+  color: white;
+  font-weight: 200;
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.mainContent .listContainer .todo-item {
+  margin: 20px;
+  padding-bottom: 20px;
+  border-width: 2px;
+  border-style: solid;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  -o-border-image: linear-gradient(to right, white 5%, #2ebaef, #46539e, #2ebaef, white 95%) 1;
+     border-image: -webkit-gradient(linear, left top, right top, color-stop(5%, white), color-stop(#2ebaef), color-stop(#46539e), color-stop(#2ebaef), color-stop(95%, white)) 1;
+     border-image: linear-gradient(to right, white 5%, #2ebaef, #46539e, #2ebaef, white 95%) 1;
+}
+
+.mainContent .listContainer .icon {
+  width: 35px;
+  height: 35px;
+  border: 1px solid rgba(46, 186, 239, 0.3);
+  border-radius: 50%;
+  padding: 8px;
+}
+
+.mainContent .listContainer .todo-status {
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  background-image: -webkit-gradient(linear, left top, right bottom, from(#d7e5f0), color-stop(#46539e), to(#2ebaef));
+  background-image: linear-gradient(to bottom right, #d7e5f0, #46539e, #2ebaef);
+  color: white;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.mainContent .listContainer .todo-info {
+  letter-spacing: 1.25px;
+  margin: 2px 0 0 10px;
+}
+
+.mainContent .listContainer .todo-title {
+  font-weight: 600;
+}
+
+.mainContent .listContainer .todo-author {
+  font-weight: 400;
+  color: #b6b6b6;
+  font-size: 14px;
+  margin-top: -7px;
+}
+
+.mainContent .addButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 40px;
+  font-weight: 300;
+  margin: 10px 0 30px 340px;
+  line-height: 0;
+  -webkit-box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 15px 0 20px 0;
+}
+
+.mainContent .addButton:hover {
+  background-color: #46539e;
+  -webkit-box-shadow: 0px 15px 20px rgba(70, 83, 158, 0.4);
+          box-shadow: 0px 15px 20px rgba(70, 83, 158, 0.4);
+  color: white;
+  -webkit-transform: translateY(-7px);
+          transform: translateY(-7px);
+}
+/*# sourceMappingURL=App.css.map */

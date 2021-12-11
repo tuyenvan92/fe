@@ -53,6 +53,7 @@ router.post('/register', async (req, res) => {
   const lastName = req.body?.lastName || '';
 
   // check email exists
+  await User.createCollection();
   const isEmailExists = await User.findOne({ email: email });
   if(isEmailExists) return res.status(400).json({
     msg: 'Email already exists',

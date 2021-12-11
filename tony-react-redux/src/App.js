@@ -34,7 +34,7 @@ function App({ number, setIncrement, setDescrement }) {
   }
 
   console.log('render app')
-
+ 
 
   // Views
   return (

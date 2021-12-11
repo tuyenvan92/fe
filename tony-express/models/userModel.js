@@ -25,6 +25,11 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
+}, {
+  capped: { size: 1024 },
+  bufferCommands: false,
+  autoCreate: false // disable `autoCreate` since `bufferCommands` is false
 });
+
 
 module.exports = mongoose.model('User', userSchema);
