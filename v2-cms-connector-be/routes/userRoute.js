@@ -94,7 +94,7 @@ router.post('/register', async (req,res) => {
   // check email exists
 
   const isEmailExists = await User.findOne({ email: email })
-  console.log('emaillll',email)
+ 
 
   if (isEmailExists) return res.status(400).json({
     msg: 'Email already exists',
@@ -119,6 +119,7 @@ router.post('/register', async (req,res) => {
       msg: 'Register successfully!',
       isSuccess: true
     })
+    console.log('register save success')
   } catch (err) {
     res.status(400).json({
       msg:err,
