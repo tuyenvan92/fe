@@ -1,154 +1,227 @@
-const router = require("express").Router()
-const {check, validationResult} = require('express-validator')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const router = require('express').Router();
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-//model
-const User = require('../models/User')
-//@route GET /api/user
-// @desc GET all user
-// @access PUBLIC
-router.get('/', async(req, res) => {
+// model
+const User = require('../model/User');
+
+// @route   GET api/user
+// @desc    get user list
+// @access  Public
+router.get('/', async (req, res) => {
   try {
-    const users = await User.find();
-
+    const users = await User.find().sort({ data: -1 });
     const result = {
-      isSuccess: true,
-      data: users
-    }
-    return res.status(200).json(result)
-  } catch (error) {
+      data: users,
+      isSuccess: true
+    };
+    res.status(200).json(result);
+  } catch (err) {
     res.status(500).json({
       msg: 'Server Error',
       isSuccess: false
     })
   }
-})
+});
 
-//@route GET /api/user
-// @desc GET all user
-// @access PUBLIC
-router.get('/:id', async(req, res) => {
-  const id = req.params.id
-  try {
-    const user = await User.findById(id)
+// @route  POST api/user/register
+// @desc   Register user
+// @access Public
+router.post('/register', async(req, res) => {
+  const firstName = req.body.firstName || '';
+  const lastName = req.body.lastName || '';
+  const email = req.body.email || '';
+  const password = req.body.password || '';
+  const avatar = req.body.avatar || '';
+  const role = req.body.role || '';
 
-    const result = {
-      isSuccess: true,
-      data: user
-    }
-    return res.status(200).json(result)
-  } catch (error) {
-    res.status(500).json({
-      msg: 'Server Error',
+  // check email exist
+  const isEmailExist = await User.findOne({ email });
+  if(isEmailExist) {
+    return res.status(400).json({
+      msg: 'Email already exsits',
       isSuccess: false
     })
-  }
-})
-
-//@route POST /api/users/register
-// @desc register  user
-// @access public
-router.post('/register',
-check('userName', 'User Name is required').not().isEmpty(),
-check('email', 'Email is required').not().isEmpty().isEmail(),
-check('password', 'Password is required').not().isEmpty(),
-async(req, res) => {
-  const errors = validationResult(req)
-  if(!errors.isEmpty()) {
-    return res.status(400).json({
-      errors: errors.array()
-    })
-  }
-
-  const emailExist = await User.findOne({email: req.body.email})
-
-  if(emailExist) {
-    return res.status(400).json({
-      msg: 'Email already exist',
-      isSuccess: false
-    })
-  }
+  };
 
   // hash password
-  const salt = await bcrypt.genSalt(10)
-  const hashPassword = await bcrypt.hash(req.body.password, salt)
+  const salt = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hash(password, salt);
 
+  // create a new user
   const user = new User({
-    userName: req.body.userName,
+    firstName,
+    lastName,
+    email,
     password: hashPassword,
-    email: req.body.email
+    avatar,
+    role
   })
-
   try {
     await user.save();
     res.status(200).json({
-      message: 'Register successfully',
-      isSuccess: true,
+      msg: 'Register Successfully!',
+      isSuccess: true
     })
-
-  } catch (error) {
+  } catch(err) {  
     res.status(500).json({
-      msg: 'Server Error',
+      msg: err,
       isSuccess: false
     })
   }
 })
 
+// @route   POST api/user/login
+// @desc    Login user
+// @access  Public
+router.post('/login', async (req, res) => {
+  const email = req.body.email || '';
+  const password = req.body.password || '';
 
-// @route POST /api/users/login
-// @desc Login user
-// @access Public
-router.post('/login',
-  check('email', 'Email is required').not().isEmpty().isEmail(),
-  check('password', 'Password is required').not().isEmpty(),
-  async(req, res) => {
-    const errors = validationResult(req);
-    
-    if(!errors.isEmpty()) {
-      return res.status(404).json({
-        error: errors.array()
-      })
-    }
-
-  //check email exist
-  const user = await User.findOne({email: req.body.email})
-
+  // check email exist
+  const user = await User.findOne({ email });
   if(!user) {
     return res.status(400).json({
       msg: 'Email or password is wrong',
       isSuccess: false
     })
-  }
-  // validation password
-  const password = await bcrypt.compare(req.body.password, user.password)
-  if(!password) {
+  };
+
+  // valid password
+  const validPassword = await bcrypt.compare(password, user.password);
+  if(!validPassword) {
     return res.status(400).json({
       msg: 'Email or password is wrong',
       isSuccess: false
     })
   }
 
-  //create && assign access token 
+  // create access token
   const payload = {
-    id: user.id,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
+    user: {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.emal,
+      avatar: user.avatar,
+      role: user.role
+    }
   }
   jwt.sign(
     payload,
-    process.env.TOKEN,
-    {expiresIn: 36000}, 
+    process.env.TOKEN_SECRET,
+    { expiresIn: 36000 },
     (err, token) => {
-      if(err) throw err 
+      if(err) throw err;
       res.header('x-auth-token', token).json({
-        token,
-        msg: 'Login successfully!',
-        isSuccess: true,
+        accessToken: token,
+        msg: 'Login Successfully!',
+        isSuccess: true
       })
     }
   )
 })
 
-module.exports = router
+// @route  PUT api/user  // xx/api/user/1234
+// @desc   Update user
+// @access Public
+router.put('/:id', async (req, res) => {
+  // get params
+  const id = req.params.id;
+  const firstName = req.body.firstName || '';
+  const lastName = req.body.lastName || '';
+  const password = req.body.password || '';
+  const avatar = req.body.avatar || '';
+  const role = req.body.role || '';
+
+  // update user
+  const user = {};
+  if(firstName) user.firstName = firstName;
+  if(lastName) user.lastName = lastName;
+  if(password) user.password = password;
+  if(avatar) user.avatar = avatar;
+  if(role) user.role = role;
+
+  // save data
+  try {
+    const data = await User.findOneAndUpdate(
+      { _id: id },
+      { $set: user},
+      { new: true }
+    );
+    if(!data) {
+      return res.status(400).json({
+        msg: 'User not found',
+        isSuccess: true
+      })
+    }
+    return res.status(200).json({
+      msg: 'Update user successfully!',
+      isSuccess: true
+    })
+  } catch (err) {
+    res.status(500).json({
+      msg: `Can't update user`,
+      isSuccess: false
+    })
+  }
+})
+
+// @route  DELETE api/user/:id  // xx/api/user/1234
+// @desc   Delete user
+// @access Public
+router.delete('/:id', async (req, res) => {
+  // get params
+  const id = req.params.id;
+
+  // delete user
+  try {
+    const data = await User.findOneAndRemove({ _id: id });
+    if(!data) {
+      return res.status(400).json({
+        msg: 'user not found',
+        isSuccess: false
+      })
+    }
+    return res.status(200).json({
+      msg: 'Delete user successfully!',
+      isSuccess: true
+    })
+  } catch(err) {
+    res.status(500).json({
+      msg: `Can't delete user`,
+      isSuccess: false
+    })
+  }
+})
+
+// @route  post api/user/auth
+// @desc   Authenticate user & token
+// @access Public
+router.post('/auth', async (req, res) => {
+  const token = req.header('x-auth-token');
+
+  if(!token) {
+    return res.status(400).json({
+      msg: 'Invalid token',
+      isSuccess: false
+    })
+  }
+
+  // verify token
+  try {
+    const user = jwt.verify(token, process.env.TOKEN_SECRET);
+    res.status(200).json({
+      data: user,
+      isSuccess: true
+    })
+  } catch(err) {
+    res.status(500).json({
+      msg: `Invalid token`,
+      isSuccess: false
+    })
+  }
+})
+
+
+module.exports = router;

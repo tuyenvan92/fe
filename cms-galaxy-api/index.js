@@ -5,14 +5,16 @@ const cors = require('cors')
 const app = express()
 dotenv.config()
 app.use(cors())
+
 //routes
 const usersRoute = require('./routes/user')
-const authRoute = require('./routes/auth')
-const filmRoute = require('./routes/film')
+// const authRoute = require('./routes/auth')
+// const filmRoute = require('./routes/film')`
+
 // env
 const PORT = process.env.PORT || 8000
 
-mongoose.connect(`mongodb+srv://tuyenvan:tuyen123@cluster0.a9zkh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,{})
+mongoose.connect(process.env.DB_CONNECT,{})
 .then(x => {
   console.log(
     `Connected to Mongo! success`
@@ -28,9 +30,9 @@ app.get('/', (req, res) => {
 })
 
 app.use(express.json({ extended: false }))
-app.use('/api/users', usersRoute)
-app.use('/api/auth', authRoute)
-app.use('/api/film', filmRoute)
+app.use('/api/user', usersRoute)
+// app.use('/api/auth', authRoute)
+// app.use('/api/film', filmRoute)
 
 app.listen(PORT, () => {
   console.log(`Server is running at PORT ${PORT}`)
