@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 app.use(express.json({ extended: false }))
 app.use('/api/user', usersRoute)
 // app.use('/api/auth', authRoute)
-// app.use('/api/film', filmRoute)
+// app.use('/api/todo', filmRoute)
 
 app.listen(PORT, () => {
   console.log(`Server is running at PORT ${PORT}`)

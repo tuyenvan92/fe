@@ -1,6 +1,10 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { check, validationResult } = require('express-validator');
+
+// middlewares
+const auth = require('../middlewares/auth');
 
 // model
 const User = require('../model/User');
@@ -74,10 +78,20 @@ router.post('/register', async(req, res) => {
 // @route   POST api/user/login
 // @desc    Login user
 // @access  Public
-router.post('/login', async (req, res) => {
+router.post('/login', [
+  check('email', `Email is't correct format`).isEmail(),
+  check('password', `Password is required`).not().isEmpty(),
+],async (req, res) => {
+  // check errors
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array()
+    })
+  }
+
   const email = req.body.email || '';
   const password = req.body.password || '';
-
   // check email exist
   const user = await User.findOne({ email });
   if(!user) {
@@ -197,12 +211,12 @@ router.delete('/:id', async (req, res) => {
 
 // @route  post api/user/auth
 // @desc   Authenticate user & token
-// @access Public
-router.post('/auth', async (req, res) => {
+// @access Private
+router.post('/auth', [auth], async (req, res) => {
   const token = req.header('x-auth-token');
 
   if(!token) {
-    return res.status(400).json({
+    return res.status(401).json({
       msg: 'Invalid token',
       isSuccess: false
     })
