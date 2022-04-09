@@ -8,4 +8,3 @@ foot();
 bar();
 foo();
 baz();
-

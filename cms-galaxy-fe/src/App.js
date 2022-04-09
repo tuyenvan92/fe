@@ -11,6 +11,7 @@ export default function MiniDrawer() {
       <Routes>
         {routesConfig.map((route, index) => {
           const Component = route.element;
+          const Guard = route.guard || React.Fragment;
           const Layout = route.layout || React.Fragment;
           
           return (
@@ -18,9 +19,11 @@ export default function MiniDrawer() {
               key={index} 
               path={route.path}
               element={
-                <Layout>
-                  <Component />
-                </Layout>
+                <Guard>
+                  <Layout>
+                    <Component />
+                  </Layout>
+                </Guard>
               } 
             />
           )

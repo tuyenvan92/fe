@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 // material
 import Avatar from "@mui/material/Avatar";
@@ -17,6 +18,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 // configs
 import { PATH_NAME } from "configs";
+
+// heplers
+import authStorage from "helpers/authStorage";
 
 function Copyright(props) {
   return (
@@ -38,7 +42,28 @@ function Copyright(props) {
 }
 
 function Login() {
-  
+  const navigate = useNavigate();
+
+  async function onSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const bodyData = {
+      email: data.get("email"),
+      password: data.get("password")
+    };
+
+    // call api
+    try {
+      const res = await axios.post("https://cms-resource-api.herokuapp.com/api/user/login", {
+        ...bodyData
+      })
+      const accessToken = res.data?.accessToken;
+      authStorage.setStorage(accessToken);
+      navigate(PATH_NAME.ROOT);
+    } catch(error) {
+      console.log('login error', error)
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -57,7 +82,7 @@ function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Box component="form" noValidate sx={{ mt: 1 }}>
+        <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={onSubmit}>
           <TextField
             margin="normal"
             required
@@ -106,3 +131,6 @@ function Login() {
 }
 
 export default Login;
+
+
+// login -> return accessToken -> navigate dashboard

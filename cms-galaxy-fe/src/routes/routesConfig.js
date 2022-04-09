@@ -11,6 +11,10 @@ import User from "pages/User";
 // layout
 import MainLayout from 'layouts/MainLayout';
 
+// guards
+import AuthGuard from "./AuthGuard";
+import GuestGuard from "./GuestGuard";
+
 // configs
 import { PATH_NAME } from "configs";
 
@@ -37,29 +41,35 @@ export const routesConfig = [
   {
     path: PATH_NAME.DASHBOARD,
     element: Dashboard,
-    layout: MainLayout
+    layout: MainLayout,
+    guard: AuthGuard,
   },
   {
     path: PATH_NAME.PRODUCT,
     element: Product,
-    layout: MainLayout
+    layout: MainLayout,
+    guard: AuthGuard,
   },
   {
     path: PATH_NAME.KANBAN,
     element: Kanban,
-    layout: MainLayout
+    layout: MainLayout,
+    guard: AuthGuard,
   },
   {
     path: PATH_NAME.USER,
     element: User,
-    layout: MainLayout
+    layout: MainLayout,
+    guard: AuthGuard,
   },
   {
     path: PATH_NAME.LOGIN,
-    element: Login
+    element: Login,
+    guard: GuestGuard
   },
   {
     path: PATH_NAME.REGISTER,
-    element: Register
+    element: Register,
+    guard: GuestGuard
   }
 ]
