@@ -65,7 +65,7 @@ function AppBar({ open, handleDrawerOpen}) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap component="div">
-          Mini variant drawer
+          Internal Tool
         </Typography>
         <div>
           <IconButton
